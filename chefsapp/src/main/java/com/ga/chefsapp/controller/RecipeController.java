@@ -55,11 +55,11 @@ public class RecipeController{
 	public ModelAndView recipeDetails(@RequestParam int id) {
 //		System.out.println(id);
 	
-		Recipe recipe = dao.findById(id);
+//		Recipe recipe = dao.findById(id);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/detail");
-		mv.addObject("recipe", recipe);
+//		mv.addObject("recipe", recipe);
 	
 //		HomeController hc = new HomeController();
 //		hc.setAppName(mv, env);
@@ -74,11 +74,11 @@ public class RecipeController{
 		// HTTP GET REQUEST - Recipe Edit
 		@GetMapping("/recipe/edit")
 		public ModelAndView editRecipe(@RequestParam int id) {
-			Recipe recipe = dao.findById(id);
+//			Recipe recipe = dao.findById(id);
 			
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("recipe/edit");
-			mv.addObject("recipe",recipe);
+//			mv.addObject("recipe",recipe);
 			
 //			HomeController hc = new HomeController();
 //			hc.setAppName(mv, env);
@@ -93,7 +93,7 @@ public class RecipeController{
 		@GetMapping("/recipe/delete")
 		public String deleteRecipe(@RequestParam int id) {
 					
-			dao.deleteById(id);
+	dao.deleteById(id);
 			return "redirect:/recipe/index";
 		}
 		
