@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ga.chefsapp.dao.UserDao;
@@ -77,5 +78,21 @@ public class UserController {
 			return "redirect:/user/login?state=failure";
 		}
 	}
+	
+//	/////////////////////////////////////////////////////////////////////////////////////////
+	
+	// to load the user details
+		@GetMapping("/user/detail")
+		public ModelAndView userDetails(@RequestParam int id) {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("user/detail");
+			
+			// place to get the app name from the home controller after it finishes
+			
+			User user = userDao.findById(id);
+			mv.addObject("user",user);
+			
+			return mv;
+		}
 
 }
