@@ -77,31 +77,5 @@ public class UserController {
 			return "redirect:/user/login?state=failure";
 		}
 	}
-	
-//	// to post the login form, will change it when implementing spring security
-//	@PostMapping("/user/login")
-//	public String login(User user) {
-//		HttpSession session = request.getSession();
-//		BCryptPasswordEncoder bCryt = new BCryptPasswordEncoder();
-//		
-//		String emailAddress = user.getEmailAddress();
-//		String password = user.getPassword();
-//		
-//		User matchedUser = dao.findByEmailAddress(emailAddress);
-//		
-//		if(matchedUser != null) {
-//			if(bCryt.matches(password, matchedUser.getPassword())) {
-//				// Session
-//				session.setAttribute("user", matchedUser);
-//				session.setAttribute("userRole", matchedUser.getUserRole());
-//				session.setAttribute("message", "You are logged in successfully");
-//				session.setAttribute("messageType", "success");
-//				return "redirect:/";
-//			}
-//		}
-//		session.setAttribute("message", "Username or password is incorrect");
-//		session.setAttribute("messageType", "danger");
-//		return "redirect:/user/login";
-//	}
 
 }
