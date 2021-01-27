@@ -1,6 +1,7 @@
 package com.ga.chefsapp.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -26,6 +27,13 @@ public class User {
 	private String password;
 	
 	private String role;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Recipe> recipes;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Rate> rates;
+	
 	
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp

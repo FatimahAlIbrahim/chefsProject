@@ -1,7 +1,7 @@
 package com.ga.chefsapp.model;
 
 import java.time.LocalDateTime;
-
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -16,7 +16,7 @@ public class Recipe {
 	private int id;
 	
 	private String name;
-	private String picuter;
+	private String picture;
 	private String description;
 	private String ingredients;
 	private String allergyWarnings;
@@ -26,11 +26,18 @@ public class Recipe {
 	private int servings;
 	private int calories;
 	
+	@ManyToOne
+	@JoinColumn(name = "FK_userId")
+	private User user;
+	
+	@OneToMany(mappedBy="recipe")
+	private Set<Rate> rates;
+	
 	@Column(name="createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createAt;
 	
-	@Column(name="updatedat", nullable = false, updatable = true)
+	@Column(name="updatedAt", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 
@@ -51,11 +58,11 @@ public class Recipe {
 	}
 
 	public String getPicuter() {
-		return picuter;
+		return picture;
 	}
 
 	public void setPicuter(String picuter) {
-		this.picuter = picuter;
+		this.picture = picuter;
 	}
 
 	public String getDescription() {
