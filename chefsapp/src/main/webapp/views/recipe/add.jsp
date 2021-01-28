@@ -1,20 +1,23 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../shared/layout.jsp" />
-<form action="recipe/add" method="post">
+
+<form id="addRecipe" action="/chefsapp/recipe/add" method="post">
 
 	<div class="form-group">
 		<label>Picture </label> <input type="text" name="picture"
-			class="form-control">
+			class="form-control" required>
 	</div>
-
+	
 	<div class="form-group">
 		<label>Name </label> <input type="text" name="name"
-			class="form-control">
+			class="form-control" required>
 	</div>
+	
 	<div class="form-group">
 		<label>Description </label> <input type="text" name="description"
-			class="form-control">
+			class="form-control" required>
 	</div>
+	
+	<div id="ingContainer"></div>
 	<div class="form-group">
 		<label>Ingredients </label>
 	</div>
@@ -22,20 +25,23 @@
 		<label>amount </label> <label>measurement</label> <label>item</label>
 	</div>
 	<div class="form-group">
-		<input type="number" step=".25" class="form-control"> <select>
+		<input id="amount" type="number" step=".25" class="form-control">
+		<select id="measurement">
 			<option value="--">--</option>
 			<option value="cup">cup</option>
 			<option value="tsp">tsp</option>
 			<option value="tbsp">tbsp</option>
 			<option value="gram">gram</option>
 			<option value="mL">mL</option>
-		</select> <input type="text" class="form-control">
+		</select> <input id="item" type="text" class="form-control">
+		<button type="button" id="addIng">add ingredient</button>
 	</div>
-	<input type="hidden" name="ingredients" >
-
+	<input id="ingredients" type="hidden" name="ingredients">
+	
 	<div class="form-group">
-		<label>Allergy Warnings</label> <select name="allergyWarnings"
-			multiple="multiple">
+		<label>Allergy Warnings</label> 
+		<select name="allergyWarnings"
+			multiple="multiple" required>
 			<option value="--">--</option>
 			<option value="Milk">Milk</option>
 			<option value="Eggs">Eggs</option>
@@ -44,13 +50,12 @@
 			<option value="peanuts">peanuts</option>
 			<option value="Wheat">Wheat</option>
 			<option value="Fish">Fish</option>
-
 		</select>
-
 	</div>
-
+	
 	<div class="form-group">
-		<label>Cuisine</label> <select name="cusisne">
+		<label>Cuisine</label> 
+		<select name="cuisine">
 			<option value="General">General</option>
 			<option value="Arabic">Arabic</option>
 			<option value="Indian">Indian</option>
@@ -59,40 +64,37 @@
 			<option value="Greek">Greek</option>
 			<option value="Japanese">Japanese</option>
 		</select>
-
 	</div>
-
-
-
+	
 	<div class="form-group">
-		<label>Type</label> <select name="type">
+		<label>Type</label> 
+		<select name="type">
 			<option value="soup">Soup</option>
 			<option value="appetizer">Appetizer</option>
 			<option value="salad">Salad</option>
 			<option value="main course">Main Course</option>
 			<option value="dessert">Dessert</option>
 		</select>
-
 	</div>
-
-
-	<div class="form-group">
 	
-		<label>duration </label> 
-				<input type="number" step=".25" class="form-control">
-				<select>
+	<div class="form-group">
+		<label>duration </label> <input id="durationNumber" type="number" step=".25" class="form-control" required> 
+		<select
+			id="durationType">
 			<option value="Hours">Hours</option>
-			<option value="Minutes">Minutes</option>	
-		</select>
-			<input type="hidden" name="duration" >		
+			<option value="Minutes">Minutes</option>
+		</select> <input id="duration" type="hidden" name="duration">
 	</div>
+	
 	<div class="form-group">
 		<label>Servings </label> <input type="number" name="servings"
-			class="form-control">
+			class="form-control" required>
 	</div>
-		<div class="form-group">
-		<label>Calories </label> <input type="number" name="calories"
-			class="form-control">
+	
+	<div class="form-group">
+		<label>Calories </label> <input type="number" name="calories" class="form-control" required>
 	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+	
+	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+	
 </form>
