@@ -20,9 +20,9 @@ public class Recipe {
 	private String description;
 	private String ingredients;
 	private String allergyWarnings;
-	private String cusisne;
+	private String cuisine;
 	private String type;
-	private String durtion;
+	private String duration;
 	private int servings;
 	private int calories;
 	
@@ -57,12 +57,12 @@ public class Recipe {
 		this.name = name;
 	}
 
-	public String getPicuter() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicuter(String picuter) {
-		this.picture = picuter;
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public String getDescription() {
@@ -89,12 +89,12 @@ public class Recipe {
 		this.allergyWarnings = allergyWarnings;
 	}
 
-	public String getCusisne() {
-		return cusisne;
+	public String getCuisine() {
+		return cuisine;
 	}
 
-	public void setCusisne(String cusisne) {
-		this.cusisne = cusisne;
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
 	}
 
 	public String getType() {
@@ -105,12 +105,14 @@ public class Recipe {
 		this.type = type;
 	}
 
-	public String getDurtion() {
-		return durtion;
+
+
+	public String getDuration() {
+		return duration;
 	}
 
-	public void setDurtion(String durtion) {
-		this.durtion = durtion;
+	public void setDuration(String duration) {
+		this.duration = duration;
 	}
 
 	public int getServings() {
@@ -129,6 +131,22 @@ public class Recipe {
 		this.calories = calories;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Rate> getRates() {
+		return rates;
+	}
+
+	public void setRates(Set<Rate> rates) {
+		this.rates = rates;
+	}
+
 	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
@@ -144,4 +162,5 @@ public class Recipe {
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
+
 }
