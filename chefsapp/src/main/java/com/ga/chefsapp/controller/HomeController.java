@@ -31,7 +31,6 @@ public class HomeController {
 		String appName = env.getProperty("app.name");
 		mv.addObject("appName", appName);
 		mv.addObject("Welcome", "Welcome to our Chefs App");
-
 		return mv;
 	}
 	

@@ -47,5 +47,10 @@ $(document).ready(function() {
 	}
 	
 	$("#addRecipe").submit(inputValidation);
+	
+	$("#editInfo").on('click', function(){
+		$("#userInfo").css("display", "none");
+		$("#editUser").css("display", "block");
+	});
 
 });

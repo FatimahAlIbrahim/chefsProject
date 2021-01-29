@@ -95,6 +95,10 @@
 		<label>Calories </label> <input type="number" name="calories" class="form-control" required>
 	</div>
 	
+	<%-- <input type="hidden" name="FK_userId" value="<security:authentication property='principal.userId' />" > --%>
+	
+	
+	
 	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
 	
 </form>

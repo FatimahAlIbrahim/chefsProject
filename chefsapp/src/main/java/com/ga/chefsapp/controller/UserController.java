@@ -1,6 +1,7 @@
 package com.ga.chefsapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,18 @@ public class UserController {
 	
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	Environment env;
+	
+//	//////////////////////////////////////////////////////////////////////////////////////
 	
 	// to load the sign up form
 	@GetMapping("/user/signup")
 	public ModelAndView signup() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/signup");
-		// place to get the app name from the home controller after it finishes
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
 		return mv;
 	}
 	
@@ -30,7 +36,8 @@ public class UserController {
 	@PostMapping("/user/signup")
 	public ModelAndView signup(User user) {
 		ModelAndView mv = new ModelAndView();
-		// place to get the app name from the home controller after it finishes
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
 		
 		//check if the user already exists or not
 		var it = userDao.findAll();
@@ -60,18 +67,19 @@ public class UserController {
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/login");
-		// place to get the app name from the home controller after it finishes
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
 		return mv;
 	}
 	
 	// to post the login form (login user), will change it when implementing spring security
 	@PostMapping("/user/login")
 	public String login(User user) {
-		BCryptPasswordEncoder bCryt = new BCryptPasswordEncoder();
+		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		String emailAddress = user.getEmailAddress();
 		String password = user.getPassword();
 		User matchedUser = userDao.findByEmailAddress(emailAddress);
-		if(matchedUser != null && bCryt.matches(password, matchedUser.getPassword())){
+		if(matchedUser != null && bCrypt.matches(password, matchedUser.getPassword())){
 			return "redirect:/user/login?state=succes";
 		}
 		else {
@@ -81,18 +89,34 @@ public class UserController {
 	
 //	/////////////////////////////////////////////////////////////////////////////////////////
 	
-	// to load the user details
+		// to load the user details
 		@GetMapping("/user/detail")
 		public ModelAndView userDetails(@RequestParam int id) {
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("user/detail");
 			
-			// place to get the app name from the home controller after it finishes
+			HomeController hc = new HomeController();
+			hc.setAppName(mv, env);
 			
 			User user = userDao.findById(id);
 			mv.addObject("user",user);
-			
 			return mv;
 		}
+		
+		@PostMapping("/user/edit")
+		public String userEdit(User user) {
+			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+			String newPassword = bCrypt.encode(user.getPassword());
+			user.setPassword(newPassword);
+			userDao.save(user);
+			return "redirect:/user/detail?id="+user.getUserId();
+		}
+		
+		@GetMapping("/user/delete")
+		public String userDelete(@RequestParam int id) {
+			userDao.deleteById(id);
+			return "redirect:/chefs/index";
+		}
+
 
 }
