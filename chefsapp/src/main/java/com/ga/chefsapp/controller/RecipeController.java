@@ -37,7 +37,7 @@ public class RecipeController{
 	}
 	
 	// HTTP GET REQUEST - Recipe Index
-	@GetMapping("/Recipe/index")
+	@GetMapping("/recipe/index")
 	public ModelAndView getRecipe() {
 		var it = dao.findAll();
 		ModelAndView mv = new ModelAndView();
