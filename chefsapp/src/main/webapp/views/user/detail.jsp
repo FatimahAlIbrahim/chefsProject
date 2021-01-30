@@ -1,5 +1,5 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<h1>User Details</h1>
 	<div id="userInfo">
 	<p>First Name: ${user.getFirstName()}</p>
@@ -32,4 +32,11 @@
 	
 	<button type="submit">Edit</button>
 	</form>
+	</div>
+	
+	<button id="shareUserButton" type="button">Share Chef</button>
+	<div id="shareUserDiv" style= "display: none;">
+		<p>QR code</p>
+		<img src="${appName}user/detail/qrcode?id=${user.getUserId()}" width="100" height="100">
+		<a href="${appName}user/detail/qrcode/download?id=${user.getUserId()}">Download QRCode</a>
 	</div>

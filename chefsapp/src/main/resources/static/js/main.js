@@ -52,5 +52,10 @@ $(document).ready(function() {
 		$("#userInfo").css("display", "none");
 		$("#editUser").css("display", "block");
 	});
+	
+	$("#shareUserButton").on('click', function(){
+		console.log("clicked")
+		$("#shareUserDiv").css("display", "block");
+	});
 
 });
