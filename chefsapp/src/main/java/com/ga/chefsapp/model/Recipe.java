@@ -41,6 +41,31 @@ public class Recipe {
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 
+	
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Set<Rate> getRates() {
+		return rates;
+	}
+
+	public void setRates(Set<Rate> rates) {
+		this.rates = rates;
+	}
+
 	public int getId() {
 		return id;
 	}

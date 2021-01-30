@@ -12,15 +12,15 @@
 <link rel="stylesheet" href="css/myStyles.css">
 </head>
 <body>
-<h2>${Welcome}</h2>
+<h2 style="display:inline;margin:10px 20px;">${Title}</h2>
 
 
 
 <% if(session.getAttribute("user") != null) { %>
 
 
-<a href="${appName}user/add">Chefs</a>
-<a href="${appName}recipe/index">Recipes</a>
+<a href="${appName}chefs/index">Chefs</a>|
+<a href="${appName}recipe/index">Recipes</a>|
 
 <a href="${appName}recipe/add">Add Recipe</a>
 
