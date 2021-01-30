@@ -1,30 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>login page</h1>
-<h6>${message}</h6>
+<jsp:include page="../shared/layout.jsp"></jsp:include>
 
-<form action="/chefsapp/user/login" method="post">
+<form action="${appName}user/login" method="post">
 
 	<div>
 		<label>Email Address</label>
-		<input name="emailAddress" type="email">
+		<input name="emailAddress" type="email" required>
 	</div>
 	
 	<div>
 		<label>Password</label>
-		<input name="password" type="password">
+		<input name="password" type="password" required>
 	</div>
 	
 	<button type="submit">Submit</button>
 
 </form>
-
-</body>
-</html>
