@@ -18,7 +18,7 @@
  --%>		
 <%--  <fmt:parseNumber var = "parseduserId" type = "number" value = "${user.userId}"/>
  --%>				
- <td>  <a href="${appName}user/detail?id=${user.userId}">${user.firstName}</a> 
+ <td>  <a href="${appName}user/detail?email=${user.emailAddress}">${user.firstName}</a> 
 				
 				<%--  <c:out value="${user.user_id}" /> --%>
 				</td>

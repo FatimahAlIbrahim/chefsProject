@@ -2,7 +2,7 @@
 
 <form id="addRecipe" action="${appName}recipe/add" method="post">
 
-	<img id="recipeImg" src="http://via.placeholder.com/500x250">
+	<img id="recipeImg" src="http://via.placeholder.com/500x250" width="500" height="250">
 	<div class="form-group">
 		<label>Picture </label> <input id="pictureUrl" type="text" name="picture"
 			class="form-control" required>
@@ -54,10 +54,15 @@
 		</select>
 	</div>
 	
+	<div id="instructionsCon">
+	
+	</div>
+	
 	<div class="form-group">
 		<label>Instructions </label> 
-		<input type="text" name="instructions" class="form-control" required>
-
+		<input id="instructionsText" type="text" class="form-control">
+		<button type="button" id="addIns">add ingredient</button>
+		<input id="instructions" type="hidden" name="instructions">
 	</div>
 	
 	<div class="form-group">
