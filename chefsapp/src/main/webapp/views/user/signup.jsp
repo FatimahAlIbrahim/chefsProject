@@ -22,6 +22,7 @@
 	</div>
 	
 	<input name="role" type="hidden" value="ROLE_USER">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
 	<button type="submit">Submit</button>
 

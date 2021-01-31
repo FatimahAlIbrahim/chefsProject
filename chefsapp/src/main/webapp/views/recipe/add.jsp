@@ -98,6 +98,7 @@
 	<%-- <input type="hidden" name="FK_userId" value="<security:authentication property='principal.userId' />" > --%>
 	
 	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
 	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
 	

@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,8 +17,8 @@
 
 
 
-<% if(session.getAttribute("user") != null) { %>
-
+<security:authorize access="isAuthenticated()">
+	<security:authentication property="principal.authorities"/>
 
 <a href="${appName}chefs/index">Chefs</a>|
 <a href="${appName}recipe/index">Recipes</a>|
@@ -26,11 +27,13 @@
 
 <div style="text-align:right; float:right;">
 
-<b>Welcome, ${user.getFirstName()} ${user.getLastName()}</b>
-<a href="${appName}user/logout">Logout</a>
+<b>Welcome<security:authentication property="principal.username" /></b>
+<a href="${appName}logout">Logout</a>
 </div>
+	</security:authorize>
 
-<% } else { %>
+
+	<security:authorize access="!isAuthenticated()">
 
 
 <a href="${appName}user/add">Chefs</a>
@@ -39,16 +42,17 @@
 <div style="text-align:right; float:right;">
 
 <a href="${appName}user/login">Login</a>
-<a href="${appName}user/signUp">Sign Up</a>
+<a href="${appName}user/signup">Sign Up</a>
 </div>
+	</security:authorize>
 
-<% } %>
+
 
 <hr>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="../javascript/main.js" type="text/javascript"></script>
-<script src="javascript/main.js" type="text/javascript"></script>
+<script src="../js/main.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
 
 </body>
 </html>

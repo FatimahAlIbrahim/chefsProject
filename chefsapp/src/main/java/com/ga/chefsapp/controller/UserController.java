@@ -99,18 +99,18 @@ public class UserController {
 
 	// to post the login form (login user), will change it when implementing spring
 	// security
-	@PostMapping("/user/login")
-	public String login(User user) {
-		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		String emailAddress = user.getEmailAddress();
-		String password = user.getPassword();
-		User matchedUser = userDao.findByEmailAddress(emailAddress);
-		if (matchedUser != null && bCrypt.matches(password, matchedUser.getPassword())) {
-			return "redirect:/user/login?state=succes";
-		} else {
-			return "redirect:/user/login?state=failure";
-		}
-	}
+//	@PostMapping("/user/login")
+//	public String login(User user) {
+//		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+//		String emailAddress = user.getEmailAddress();
+//		String password = user.getPassword();
+//		User matchedUser = userDao.findByEmailAddress(emailAddress);
+//		if (matchedUser != null && bCrypt.matches(password, matchedUser.getPassword())) {
+//			return "redirect:/user/login?state=succes";
+//		} else {
+//			return "redirect:/user/login?state=failure";
+//		}
+//	}
 
 //	/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -137,53 +137,16 @@ public class UserController {
 	@GetMapping("/chefs/index")
 	public ModelAndView loadChefs() {
 
-		// List<User> list = userDao.getChefs();
-
 		ModelAndView mv = new ModelAndView();
-		// mv.addObject("chefs",list);
-		// retrieve all users' id
-		//
-		var it = userDao.findAll();
-		var it2 = recipeDao.findAll();
 
-		for (User dbUser : it) {
-			// Recipe r = recipeDao.findByFKuserId(dbUser.getUserId());
-			Object[] chefs = recipeDao.findByFKuserId();
-//System.out.println( chefs);
-			for (Recipe dbRecipe : it2) {
-//		if(r != null) {
-//			mv.setViewName("chefs/index");
-//			mv.addObject("chefs", it);
-//		}
-
-				if (dbUser.getUserId() == dbRecipe.getUser().getUserId()) {
-
-					mv.setViewName("chefs/index");
-					mv.addObject("chefs", it);
-					//System.out.println(it.toString());
-					return mv;
-				}
-			}
-		}
-//			if (chefs != null) {
-//
-//				mv.setViewName("chefs/index");
-//				mv.addObject("chefs", chefs);
-//			
-//				return mv;
-//			}
-		// }
-		// }
-
+		var it = userDao.findByFKuserId();
+		
+		mv.setViewName("chefs/index");
+		mv.addObject("chefs", it);
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 
 		return mv;
-
-		
-//
-//		User user = userDao.findById(id);
-//		mv.addObject("user", user);
 		
 	}
 

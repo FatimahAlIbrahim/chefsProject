@@ -13,10 +13,9 @@ import org.springframework.data.repository.CrudRepository;
 public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 	public Recipe findById(int id);
 	
-	@Transactional
-	@Modifying
-	@Query(value="select * from User where user_id=(select fk_user_id from Recipe)", nativeQuery=true)//
-	public Object[] findByFKuserId();
+	
+//	@Query(value="select * from User where user_id=(select fk_user_id from Recipe)", nativeQuery=true)//
+//	public Object[] findByFKuserId();
 	
 	//public Recipe findByFKuserId(int id);
 }
