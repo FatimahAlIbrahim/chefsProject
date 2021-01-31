@@ -1,12 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=windows-1256"
-    pageEncoding="windows-1256"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="windows-1256">
-<title>Insert title here</title>
-</head>
-<body>
-<h6>  add </h6>
-</body>
-</html>
+<jsp:include page="../shared/layout.jsp" />
+
+<form id="addRecipe" action="/chefsapp/recipe/add" method="post">
+
+	<div class="form-group">
+		<label>Picture </label> <input type="text" name="picture"
+			class="form-control" required>
+	</div>
+	
+	<div class="form-group">
+		<label>Name </label> <input type="text" name="name"
+			class="form-control" required>
+	</div>
+	
+	<div class="form-group">
+		<label>Description </label> <input type="text" name="description"
+			class="form-control" required>
+	</div>
+	
+	<div id="ingContainer"></div>
+	<div class="form-group">
+		<label>Ingredients </label>
+	</div>
+	<div class="form-group">
+		<label>amount </label> <label>measurement</label> <label>item</label>
+	</div>
+	<div class="form-group">
+		<input id="amount" type="number" step=".25" class="form-control">
+		<select id="measurement">
+			<option value="--">--</option>
+			<option value="cup">cup</option>
+			<option value="tsp">tsp</option>
+			<option value="tbsp">tbsp</option>
+			<option value="gram">gram</option>
+			<option value="mL">mL</option>
+		</select> <input id="item" type="text" class="form-control">
+		<button type="button" id="addIng">add ingredient</button>
+	</div>
+	<input id="ingredients" type="hidden" name="ingredients">
+	
+	<div class="form-group">
+		<label>Allergy Warnings</label> 
+		<select name="allergyWarnings"
+			multiple="multiple" required>
+			<option value="--">--</option>
+			<option value="Milk">Milk</option>
+			<option value="Eggs">Eggs</option>
+			<option value="Soy">Soy</option>
+			<option value="yeast">yeast</option>
+			<option value="peanuts">peanuts</option>
+			<option value="Wheat">Wheat</option>
+			<option value="Fish">Fish</option>
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label>Cuisine</label> 
+		<select name="cuisine">
+			<option value="General">General</option>
+			<option value="Arabic">Arabic</option>
+			<option value="Indian">Indian</option>
+			<option value="Chinese">Chinese</option>
+			<option value="Italian">Italian</option>
+			<option value="Greek">Greek</option>
+			<option value="Japanese">Japanese</option>
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label>Type</label> 
+		<select name="type">
+			<option value="soup">Soup</option>
+			<option value="appetizer">Appetizer</option>
+			<option value="salad">Salad</option>
+			<option value="main course">Main Course</option>
+			<option value="dessert">Dessert</option>
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label>duration </label> <input id="durationNumber" type="number" step=".25" class="form-control" required> 
+		<select
+			id="durationType">
+			<option value="Hours">Hours</option>
+			<option value="Minutes">Minutes</option>
+		</select> <input id="duration" type="hidden" name="duration">
+	</div>
+	
+	<div class="form-group">
+		<label>Servings </label> <input type="number" name="servings"
+			class="form-control" required>
+	</div>
+	
+	<div class="form-group">
+		<label>Calories </label> <input type="number" name="calories" class="form-control" required>
+	</div>
+	
+	<%-- <input type="hidden" name="FK_userId" value="<security:authentication property='principal.userId' />" > --%>
+	
+	
+	
+	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+	
+</form>
