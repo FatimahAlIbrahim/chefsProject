@@ -2,8 +2,9 @@
 
 <form id="addRecipe" action="/chefsapp/recipe/add" method="post">
 
+	<img id="recipeImg" src="http://via.placeholder.com/500x250">
 	<div class="form-group">
-		<label>Picture </label> <input type="text" name="picture"
+		<label>Picture </label> <input id="pictureUrl" type="text" name="picture"
 			class="form-control" required>
 	</div>
 	
@@ -54,6 +55,12 @@
 	</div>
 	
 	<div class="form-group">
+		<label>Instructions </label> 
+		<input type="text" name="instructions" class="form-control" required>
+
+	</div>
+	
+	<div class="form-group">
 		<label>Cuisine</label> 
 		<select name="cuisine">
 			<option value="General">General</option>
@@ -95,7 +102,7 @@
 		<label>Calories </label> <input type="number" name="calories" class="form-control" required>
 	</div>
 	
-	<%-- <input type="hidden" name="FK_userId" value="<security:authentication property='principal.userId' />" > --%>
+	<input type="hidden" name="user" value="${userId}" >
 	
 	
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
