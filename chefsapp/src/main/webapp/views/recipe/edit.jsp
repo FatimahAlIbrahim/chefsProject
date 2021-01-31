@@ -8,5 +8,9 @@
 </head>
 <body>
 <h6>  edit </h6>
+
+
+<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+ --%>
 </body>
 </html>
