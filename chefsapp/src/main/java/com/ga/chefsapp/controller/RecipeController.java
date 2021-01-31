@@ -53,7 +53,7 @@ public class RecipeController{
 	// HTTP GET REQUEST - Recipe Index
 	@GetMapping("/recipe/index")
 	public ModelAndView getRecipe() {
-		var it = dao.findAll();
+		var it = dao.findByOrderedRating();
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/index");
 		mv.addObject("recipes", it);
