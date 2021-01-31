@@ -10,10 +10,10 @@
 	<div class="form-group">
 		<label>Recipe Type</label> <input type="text" name="description" value="${recipe.type}" class="form-control">
 		<label>Recipe cusisne </label> <input type="text" name="description" value="${recipe.cusisne}" class="form-control">
-		<label>Recipe Description </label> <input type="text" name="description" value="${recipe.servings}" class="form-control">
-		<label>Recipe Description </label> <input type="text" name="description" value="${recipe.ingredients}" class="form-control">
-		<label>Recipe Description </label> <input type="text" name="description" value="${recipe.description}" class="form-control">
-		<label>Recipe Description </label> <input type="text" name="description" value="${recipe.calories}" class="form-control">	
+		<label>Recipe type </label> <input type="text" name="description" value="${recipe.servings}" class="form-control">
+		<label>Recipe ingredients </label> <input type="text" name="description" value="${recipe.ingredients}" class="form-control">
+		<label>Recipe description </label> <input type="text" name="description" value="${recipe.description}" class="form-control">
+		<label>Recipe calories </label> <input type="text" name="description" value="${recipe.calories}" class="form-control">	
 	</div>
 
 	<div class="form-group">
