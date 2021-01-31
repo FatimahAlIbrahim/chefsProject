@@ -25,8 +25,26 @@
 		</select>
 	</div>
 	
+
+  
 	<input type="hidden" name="id" value="${recipe.id}">
 
-	<button type="submit">Submit</button>
+	<!-- <button type="submit">Submit</button> -->
 
 </form>
+	<!--user rating -->
+	<div class="main">
+	<label>Rate the recipe:</label>
+	 <i class="fa fa-star checked" id="1"></i> 
+   <i class="fa fa-star unchecked" id="2"></i>
+   <i class="fa fa-star unchecked" id="3"></i>
+   <i class="fa fa-star unchecked" id="4"></i>
+   <i class="fa fa-star unchecked" id="5"></i>
+	</div>
+	
+	 <div>
+  <button class="btn" id="buttonnew">Submit rating</button>
+  </div>
+
+<script src="../js/rate.js" type="text/javascript"></script>
+<script src="js/rate.js" type="text/javascript"></script>

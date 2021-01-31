@@ -1,1 +1,24 @@
 @charset "ISO-8859-1";
+.fa
+{
+  font-size:30px !important;
+  cursor:pointer;
+}
+.checked
+{
+  color:yellow;
+}
+.unchecked
+{
+  color:black;
+}
+.btn
+{
+  width:150px;
+  height:20px;
+  
+}
+.btn:hover
+{
+  cursor:pointer;
+}

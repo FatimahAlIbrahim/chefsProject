@@ -1,6 +1,6 @@
 <jsp:include page="../shared/layout.jsp" />
 
-<form id="addRecipe" action="/chefsapp/recipe/add" method="post">
+<form id="addRecipe" action="${appName}recipe/add" method="post">
 
 	<img id="recipeImg" src="http://via.placeholder.com/500x250">
 	<div class="form-group">

@@ -2,6 +2,15 @@ package com.ga.chefsapp.dao;
 
 import com.ga.chefsapp.model.Recipe;
 
+import com.ga.chefsapp.model.User;
+
+
+
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.Modifying;
+
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,10 +27,11 @@ public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 	  		+ "                                ) DESC",
 	            nativeQuery=true)
 	public Iterable<Recipe> findByOrderedRating();
-	    public Recipe findById(int id);
+	  
 	    
 
-	
-	
+
+	public Recipe findById(int id);
+
 
 }
