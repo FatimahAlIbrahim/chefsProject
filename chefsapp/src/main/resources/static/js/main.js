@@ -57,5 +57,10 @@ $(document).ready(function() {
 		console.log("clicked")
 		$("#shareUserDiv").css("display", "block");
 	});
+	
+	$("#pictureUrl").on('change', function(){
+		var newUrl = $(this).val();
+		$("#recipeImg").attr("src",newUrl);
+	});
 
 });

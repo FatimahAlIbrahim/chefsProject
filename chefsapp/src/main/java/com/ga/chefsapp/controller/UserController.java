@@ -119,16 +119,13 @@ public class UserController {
 	public ModelAndView userDetails(@RequestParam int id) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/detail");
-
-
-		// place to get the app name from the home controller after it finishes
-
-		User user = userDao.findById(id);
-		mv.addObject("user", user);
-
+		
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 		
+		User user = userDao.findById(id);
+		mv.addObject("user", user);
+
 		return mv;
 	}
 

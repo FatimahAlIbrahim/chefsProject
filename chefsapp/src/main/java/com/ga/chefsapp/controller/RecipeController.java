@@ -1,12 +1,17 @@
 package com.ga.chefsapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ga.chefsapp.dao.RecipeDao;
+import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.Recipe;
+import com.ga.chefsapp.model.User;
 	
 	
 @Controller
@@ -14,19 +19,28 @@ public class RecipeController{
 	
 	@Autowired
 	private RecipeDao dao;
+	@Autowired
+	private Environment env;
+	@Autowired
+	private UserDao userDao;
 
 // HTTP GET REQUEST - Recipe Add
 	@GetMapping("/recipe/add")
 	public ModelAndView addRecipe() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/add");
+	
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
 		
-//		HomeController hc = new HomeController();
-//		hc.setAppName(mv, env);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		
+		User user = userDao.findByEmailAddress(email);
+		mv.addObject("userId",user.getUserId());
 			
 		return mv;
 	}
-	
 	
 	
 	// HTTP POST REQUEST - Recipe Add
