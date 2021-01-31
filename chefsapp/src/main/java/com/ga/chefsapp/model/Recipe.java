@@ -20,6 +20,7 @@ public class Recipe {
 	private String description;
 	private String ingredients;
 	private String allergyWarnings;
+	private String instructions;
 	private String cuisine;
 	private String type;
 	private String duration;
@@ -89,6 +90,14 @@ public class Recipe {
 		this.allergyWarnings = allergyWarnings;
 	}
 
+	public String getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
+
 	public String getCuisine() {
 		return cuisine;
 	}
@@ -104,8 +113,6 @@ public class Recipe {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 
 	public String getDuration() {
 		return duration;
@@ -162,5 +169,8 @@ public class Recipe {
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
+
+	
+
 
 }
