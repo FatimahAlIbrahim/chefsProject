@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,7 @@ import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.Recipe;
 import com.ga.chefsapp.helpers.ZXingHelper;
 import com.ga.chefsapp.model.User;
+import com.ga.chefsapp.model.UserDetailsImpl;
 
 @Controller
 public class UserController {
@@ -42,9 +44,6 @@ public class UserController {
 
 	@Autowired
 	private Environment env;
-
-
-//	//////////////////////////////////////////////////////////////////////////////////////
 
 	// to load the sign up form
 	@GetMapping("/user/signup")
@@ -60,13 +59,12 @@ public class UserController {
 	@PostMapping("/user/signup")
 	public ModelAndView signup(User user) {
 		ModelAndView mv = new ModelAndView();
-		// place to get the app name from the home controller after it finishes
+		
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 
-		// check if the user already exists or not
 		var it = userDao.findAll();
-
+		// check if the user already exists or not
 		for (User dbUser : it) {
 			if (dbUser.getEmailAddress().equals(user.getEmailAddress())) {
 				mv.setViewName("user/signup");
@@ -75,6 +73,7 @@ public class UserController {
 			}
 		}
 		mv.setViewName("user/login");
+		
 		// password Encryption
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		String newPassword = bCrypt.encode(user.getPassword());
@@ -84,8 +83,6 @@ public class UserController {
 		mv.addObject("message", "User registered successfully");
 		return mv;
 	}
-
-//	///////////////////////////////////////////////////////////////////////////////////
 
 	// to load the login form
 	@GetMapping("/user/login")
@@ -97,39 +94,21 @@ public class UserController {
 		return mv;
 	}
 
-	// to post the login form (login user), will change it when implementing spring
-	// security
-//	@PostMapping("/user/login")
-//	public String login(User user) {
-//		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-//		String emailAddress = user.getEmailAddress();
-//		String password = user.getPassword();
-//		User matchedUser = userDao.findByEmailAddress(emailAddress);
-//		if (matchedUser != null && bCrypt.matches(password, matchedUser.getPassword())) {
-//			return "redirect:/user/login?state=succes";
-//		} else {
-//			return "redirect:/user/login?state=failure";
-//		}
-//	}
-
-//	/////////////////////////////////////////////////////////////////////////////////////////
-
 	// to load the user details
 	@GetMapping("/user/detail")
-	public ModelAndView userDetails(@RequestParam int id) {
+	public ModelAndView userDetails(@RequestParam String email) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/detail");
 		
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 		
-		User user = userDao.findById(id);
+		User user = userDao.findByEmailAddress(email);
 		mv.addObject("user", user);
 
 		return mv;
 	}
 
-	/////////////////////////////////////////////////////////////
 	// to load all users having recipes
 	@GetMapping("/chefs/index")
 	public ModelAndView loadChefs() {
@@ -147,14 +126,18 @@ public class UserController {
 		
 	}
 
-	@PostMapping("/user/edit")
-	public String userEdit(User user) {
-		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		String newPassword = bCrypt.encode(user.getPassword());
-		user.setPassword(newPassword);
-		userDao.save(user);
-		return "redirect:/user/detail?id=" + user.getUserId();
-	}
+//	@PostMapping("/user/edit")
+//	public String userEdit(User user, Principal principal) {
+//		UserDetailsImpl udi = (UserDetailsImpl) principal;
+//		if(udi.getUsername().equals(user.getEmailAddress())) {
+//			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+//			String newPassword = bCrypt.encode(user.getPassword());
+//			user.setPassword(newPassword);
+//			userDao.save(user);
+//			return "redirect:/user/detail?email=" + user.getEmailAddress();
+//		}
+//		return "redirect:/user/detail?email=" + user.getEmailAddress();
+//	}
 
 	@GetMapping("/user/delete")
 	public String userDelete(@RequestParam int id) {
@@ -163,25 +146,25 @@ public class UserController {
 	}
 
 	@GetMapping("/user/detail/qrcode")
-	public void qrcode(@RequestParam int id, HttpServletResponse response) throws Exception {
+	public void qrcode(@RequestParam String email, HttpServletResponse response) throws Exception {
 		response.setContentType("image/png");
 		OutputStream outputStream = response.getOutputStream();
-		outputStream.write(ZXingHelper.getQRCode("/chefsapp/user/detail?=" + id, 200, 200));
+		outputStream.write(ZXingHelper.getQRCode("/chefsapp/user/detail?email=" + email, 200, 200));
 		outputStream.flush();
 		outputStream.close();
 	}
 
 	@GetMapping("/user/detail/qrcode/download")
-	public String downloadQRCode(@RequestParam int id, HttpServletResponse response) {
+	public String downloadQRCode(@RequestParam String email, HttpServletResponse response) {
 		String appName = env.getProperty("app.name");
-		User user = userDao.findById(id);
+		User user = userDao.findByEmailAddress(email);
 		String fileName = "Chef " + user.getFirstName() + " " + user.getLastName();
 
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 		
 		try {
-			URL url = new URL("http://localhost:8082"+appName + "user/detail/qrcode?id=" + id);
+			URL url = new URL("http://localhost:8082"+appName + "user/detail/qrcode?email=" + email);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(new File(pathToDownloads+System.getProperty("file.separator")+fileName+".png"));
@@ -193,10 +176,10 @@ public class UserController {
 			}
 			out.close();
 			in.close();
-			return "redirect:/user/detail?id=" + user.getUserId();
+			return "redirect:/user/detail?email=" + user.getEmailAddress();
 		} catch (IOException e) {
 			e.printStackTrace();
-			return "redirect:/user/detail?id=" + user.getUserId();
+			return "redirect:/user/detail?email=" + user.getEmailAddress();
 		}
 	}
 

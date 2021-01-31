@@ -27,7 +27,7 @@
 
 <div style="text-align:right; float:right;">
 
-<b>Welcome <security:authentication property="principal.username"/></b>
+<a href="${appName}user/detail?email=<security:authentication property="principal.username"/>" ><b>Welcome <security:authentication property="principal.username"/></b></a>
 <a href="${appName}logout">Logout</a>
 </div>
 	</security:authorize>

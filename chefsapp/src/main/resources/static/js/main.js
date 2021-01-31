@@ -28,19 +28,50 @@ $(document).ready(function() {
 	$("#ingContainer").on("click", ".deleteIng", function() {
 		$(this).parent().remove();
 	});
+	
+	$("#addIns").on("click", function() {
+		var step = $("#instructionsText").val();
+
+		if (step != "") {
+			$("#instructionsCon").append("<div class='insItem'><p class='insText' style='display: inline;'>" + step + "</p><span class='deleteIns' style='display:  none;'> delete</span></div>");
+		}
+		else {
+			alert("please enter an instruction");
+		}
+	});
+	
+	$("#instructionsCon").on("mouseenter", ".insItem", function() {
+		$(this).children(".deleteIns").css("display", "inline");
+	});
+
+	$("#instructionsCon").on("mouseleave", ".insItem", function() {
+		$(this).children(".deleteIns").css("display", "none");
+	});
+
+	$("#instructionsCon").on("click", ".deleteIns", function() {
+		$(this).parent().remove();
+	});
 
 	function inputValidation(event) {
 		if (!$.trim($('#ingContainer').html()).length) {
 			event.preventDefault();
-			alert("please add at least 1 ingredient");
+			alert("please add at least 1 step and 1 ingredient");
 		}
 		else {
 			var ingredients = "";
 			$(".ingItem").each(function() {
 				ingredients += $(this).children(".ingText").text() + ", ";
 			});
+			
+			var instructions = "";
+			$(".insItem").each(function() {
+				instructions += $(this).children(".insText").text() + ", ";
+			});
+			
 			ingredients = ingredients.substring(0, ingredients.length - 2);
+			instructions = instructions.substring(0, instructions.length - 2);
 			$("#ingredients").val(ingredients);
+			$("#instructions").val(instructions);
 			var duration = $(durationNumber).val() + " " + $("#durationType").children("option:selected").val();
 			$("#duration").val(duration);
 		}

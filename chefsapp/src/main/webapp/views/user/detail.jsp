@@ -5,10 +5,10 @@
 	<p>First Name: ${user.getFirstName()}</p>
 	<p>Last Name: ${user.getLastName()}</p>
 	<p>Email Address: ${user.getEmailAddress()}</p>
-	<button id="editInfo" type="button">Edit Information</button>
+	<!-- <button id="editInfo" type="button">Edit Information</button> -->
 	</div>
 	
-	<div id="editUser" style="display: none;">
+	<%-- <div id="editUser" style="display: none;">
 	
 	<form action="${appName}user/edit" method="post">
 	<div>
@@ -32,11 +32,11 @@
 	
 	<button type="submit">Edit</button>
 	</form>
-	</div>
+	</div> --%>
 	
 	<button id="shareUserButton" type="button">Share Chef</button>
 	<div id="shareUserDiv" style= "display: none;">
 		<p>QR code</p>
-		<img src="${appName}user/detail/qrcode?id=${user.getUserId()}" width="100" height="100">
-		<a href="${appName}user/detail/qrcode/download?id=${user.getUserId()}">Download QRCode</a>
+		<img src="${appName}user/detail/qrcode?email=${user.getEmailAddress()}" width="100" height="100">
+		<a href="${appName}user/detail/qrcode/download?email=${user.getEmailAddress()}">Download QRCode</a>
 	</div>
