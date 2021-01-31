@@ -25,7 +25,7 @@ public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 	  		+ "                                ) DESC",
 	            nativeQuery=true)
 	public Iterable<Recipe> findByOrderedRating();
-	    public Recipe findById(int id);
+	  
 	    
 
 	public Recipe findById(int id);
