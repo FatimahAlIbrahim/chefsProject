@@ -1,8 +1,11 @@
 <jsp:include page="../shared/layout.jsp" />
 
+
 <p class="h3">Add Recipe</p>
 
-<form id="addRecipe" action="/chefsapp/recipe/add" method="post">
+
+<form id="addRecipe" action="${appName}recipe/add" method="post">
+
 
 	<img class="img-fluid img-thumbnail" id="recipeImg" src="../images/placeholder-image.png">
 	<div class="mb-3">
