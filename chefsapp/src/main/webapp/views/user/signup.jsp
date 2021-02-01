@@ -4,6 +4,12 @@
 
 <form action="${appName}user/signup" method="post">
 
+	<img class="img-fluid img-thumbnail" id="userProfileImage" src="../images/profile.png">
+	<div class="mb-3">
+		<label class="form-label">Picture URL</label> 
+		<input id="pictureUrlUser" type="text" name="picture" class="form-control" required>
+	</div>
+	
 	<div class="mb-3">
 		<label class="form-label">First Name</label>
 		<input name="firstName" type="text" class="form-control" required>

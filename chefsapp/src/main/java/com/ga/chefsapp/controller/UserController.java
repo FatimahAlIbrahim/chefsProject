@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +29,6 @@ import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.Recipe;
 import com.ga.chefsapp.helpers.ZXingHelper;
 import com.ga.chefsapp.model.User;
-import com.ga.chefsapp.model.UserDetailsImpl;
 
 @Controller
 public class UserController {
@@ -103,6 +101,11 @@ public class UserController {
 		hc.setAppName(mv, env);
 		
 		User user = userDao.findByEmailAddress(email);
+		
+		if(user.getPicture().equals(null)) {
+			user.setPicture("../images/profile.png");
+		}
+		
 		mv.addObject("user", user);
 
 		return mv;
@@ -126,7 +129,7 @@ public class UserController {
 	}
 
 	@PostMapping("/user/edit")
-	public String userEdit(User user, Principal principal) {
+	public String userEdit(User user) {
 			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 			String newPassword = bCrypt.encode(user.getPassword());
 			user.setPassword(newPassword);

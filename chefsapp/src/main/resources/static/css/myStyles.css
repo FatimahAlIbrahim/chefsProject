@@ -1,9 +1,10 @@
 @charset "ISO-8859-1";
 
 
-form {
+form, #userInfo {
 	margin-left: 10%;
 	margin-right: 10%;
+	margin-bottom: 2%;
 }
 
 .h3 {
@@ -45,17 +46,30 @@ form {
 	margin-bottom: 2%;
 }
 
+#userProfileImage {
+	align-content: center;
+	height: 50vh;
+	margin-bottom: 2%;
+}
+
+#userDetailImage{
+	width: 100%;
+	height: 50vh;
+	margin-left: -1%;
+}
+
 .insItem, .ingItem {
-	border: solid gray;
+	border: solid #F8F9F9;
 	padding: 1%;
 	border-radius: 5px;
-	background-color: #FEF6E8;
+	background-color: #F8F9F9;
 	font-weight: 600;
 }
 
 #ingContainer, #instructionsCon {
 	padding: 1%;
 }
+
 .fa
 {
   font-size:30px !important;
@@ -69,6 +83,7 @@ form {
 {
   color:black;
 }
+
 .btn:hover
 {
   cursor:pointer;

@@ -9,7 +9,7 @@
 
 	<img class="img-fluid img-thumbnail" id="recipeImg" src="../images/placeholder-image.png">
 	<div class="mb-3">
-		<label class="form-label">Picture URL</label> <input id="pictureUrl" type="text" name="picture" class="form-control" required>
+		<label class="form-label">Picture URL</label> <input id="pictureUrl" type="text" name="picture" class="form-control">
 	</div>
 
 	<div class="mb-3">
@@ -57,7 +57,7 @@
 				<input id="item" type="text" class="form-control">
 			</div>
 			<div class="col">
-				<button class="btn btn-outline-dark" type="button" id="addIng">Add Ingredient</button>
+				<button style="width: 100%" class="btn btn-outline-dark" type="button" id="addIng">Add Ingredient</button>
 			</div>
 		</div>
 	</div>
