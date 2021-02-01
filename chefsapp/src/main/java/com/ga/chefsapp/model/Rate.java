@@ -10,21 +10,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "Rate")
-@IdClass(RateId.class)
 public class Rate{
 
+	 @Id
+	 @GeneratedValue
+	private int rateId;
 	
 	private int rating;
 	private String comment;
 	
-	@Id
 	@ManyToOne
-	@JoinColumn(name = "FK_userId")
+	@JoinColumn(name = "user")
 	private User user;
 	
-	@Id
 	@ManyToOne
-	@JoinColumn(name = "FK_recipeId")
+	@JoinColumn(name = "recipe")
 	private Recipe recipe;
 	
 	@Column(name = "createdAt", nullable = false, updatable = false)
@@ -36,8 +36,33 @@ public class Rate{
 	private LocalDateTime updateAt;
 
 	// Getters and Setters
+	
 	public int getRating() {
 		return rating;
+	}
+
+	public int getRateId() {
+		return rateId;
+	}
+
+	public void setRateId(int rateId) {
+		this.rateId = rateId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
 	}
 
 	public void setRating(int rating) {

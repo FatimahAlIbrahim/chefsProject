@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ga.chefsapp.dao.ChefDao;
 import com.ga.chefsapp.dao.RecipeDao;
 import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.Recipe;
@@ -70,7 +69,7 @@ public class UserController {
 		for (User dbUser : it) {
 			if (dbUser.getEmailAddress().equals(user.getEmailAddress())) {
 				mv.setViewName("user/signup");
-				mv.addObject("message", "User already exists");
+				mv.addObject("signupFailMessage", "Email address is already exists");
 				return mv;
 			}
 		}
@@ -81,7 +80,7 @@ public class UserController {
 		user.setPassword(newPassword);
 
 		userDao.save(user);
-		mv.addObject("message", "User registered successfully");
+		mv.addObject("signupSuccessMessage", "Your registeration has been successfully completed! Please login");
 		return mv;
 	}
 

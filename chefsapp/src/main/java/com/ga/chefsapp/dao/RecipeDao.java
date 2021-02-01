@@ -19,8 +19,8 @@ public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 	  		+ "									(\n"
 	  		+ "                                    select avg(rating)\n"
 	  		+ "                                    from rate \n"
-	  		+ "                                    where recipe.id =  fk_recipe_id\n"
-	  		+ "                                    group by fk_recipe_id\n"
+	  		+ "                                    where recipe.id =  recipe\n"
+	  		+ "                                    group by recipe\n"
 	  		+ "									\n"
 	  		+ "                                ) DESC",
 	            nativeQuery=true)

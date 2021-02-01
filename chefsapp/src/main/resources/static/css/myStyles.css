@@ -6,17 +6,11 @@
 }
 .checked
 {
-  color:yellow;
+  color:#fbeb26;
 }
 .unchecked
 {
   color:black;
-}
-.btn
-{
-  width:150px;
-  height:20px;
-  
 }
 .btn:hover
 {
