@@ -35,11 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 		http
 		.authorizeRequests()
-		.antMatchers("/recipe/add", "/recipe/edit", "/recipe/delete").hasAnyRole("USER", "ADMIN")
+		.antMatchers("/recipe/add", "/recipe/edit", "/recipe/delete", "/user/edit").hasAnyRole("USER", "ADMIN")
 		.antMatchers("/user/delete").hasRole("ADMIN")
 		
 		.and()
 		.formLogin()
+		
 		
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -2,15 +2,21 @@
 ## Introduction
 Chefs app is a website that manages the recipes ...
 ## Technologies used:
+* HTML, CSS, Javascript and JQuery
 * Spring io
 * SQL
 * Trello
 * Wireframe.cc
+* GitHub & GitBash
+* Bootstrap 
 ## General approach:
+Planning for the project using Trello, devide the tasks , adding deadlines and help each other when someone face a problem. 
 ## Unsolved problems or major hurdles you had to overcome:
+
 ## Planning documentation:
 We used Trello website as a tool to devide and manage the project's tasks between us.
 ## Installation instructions for any dependencies:
+
 ## Wireframes:
 ![Wireframe](wireframes/homeWireframe.png)
 ![Wireframe](wireframes/chefsWireframe.png)
@@ -29,4 +35,12 @@ We used Trello website as a tool to devide and manage the project's tasks betwee
 7. As a chef, I want to be able to add recipes so that I can share my recipe with the world.
 8. As a chef, I want to edit my recipe so that I can correct any mistakes  I find.
 9. As a chef, I want to delete my recipe so that I can remove any recipe I don't want to share anymore.
+# Credits:
+Download image:
+* https://www.youtube.com/watch?v=rd6m-6l2xQQ
+* https://stackoverflow.com/questions/31448193/save-to-desktop-without-the-exact-path
+
+Generate QRCode:
+* http://learningprogramming.net/java/spring-mvc/qrcode-in-spring-mvc-framework-and-spring-data-jpa/
+
 

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,13 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ga.chefsapp.dao.ChefDao;
 import com.ga.chefsapp.dao.RecipeDao;
 import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.Recipe;
 import com.ga.chefsapp.helpers.ZXingHelper;
 import com.ga.chefsapp.model.User;
-import com.ga.chefsapp.model.UserDetailsImpl;
 
 @Controller
 public class UserController {
@@ -68,7 +65,7 @@ public class UserController {
 		for (User dbUser : it) {
 			if (dbUser.getEmailAddress().equals(user.getEmailAddress())) {
 				mv.setViewName("user/signup");
-				mv.addObject("message", "User already exists");
+				mv.addObject("signupFailMessage", "Email address is already exists");
 				return mv;
 			}
 		}
@@ -80,7 +77,7 @@ public class UserController {
 		user.setPassword(newPassword);
 
 		userDao.save(user);
-		mv.addObject("message", "User registered successfully");
+		mv.addObject("signupSuccessMessage", "Your registeration has been successfully completed! Please login");
 		return mv;
 	}
 
@@ -104,6 +101,11 @@ public class UserController {
 		hc.setAppName(mv, env);
 		
 		User user = userDao.findByEmailAddress(email);
+		
+		if(user.getPicture().equals(null)) {
+			user.setPicture("../images/profile.png");
+		}
+		
 		mv.addObject("user", user);
 
 		return mv;
@@ -126,18 +128,14 @@ public class UserController {
 		
 	}
 
-//	@PostMapping("/user/edit")
-//	public String userEdit(User user, Principal principal) {
-//		UserDetailsImpl udi = (UserDetailsImpl) principal;
-//		if(udi.getUsername().equals(user.getEmailAddress())) {
-//			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-//			String newPassword = bCrypt.encode(user.getPassword());
-//			user.setPassword(newPassword);
-//			userDao.save(user);
-//			return "redirect:/user/detail?email=" + user.getEmailAddress();
-//		}
-//		return "redirect:/user/detail?email=" + user.getEmailAddress();
-//	}
+	@PostMapping("/user/edit")
+	public String userEdit(User user) {
+			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+			String newPassword = bCrypt.encode(user.getPassword());
+			user.setPassword(newPassword);
+			userDao.save(user);
+			return "redirect:/user/detail?email=" + user.getEmailAddress();
+	}
 
 	@GetMapping("/user/delete")
 	public String userDelete(@RequestParam int id) {

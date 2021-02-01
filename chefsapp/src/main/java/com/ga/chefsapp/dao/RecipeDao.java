@@ -14,12 +14,17 @@ import org.springframework.data.repository.query.Param;
 
 public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 
-	@Query(value = "SELECT * FROM recipe order by\n" + "									(\n"
-			+ "                                    select avg(rating)\n"
-			+ "                                    from rate \n"
-			+ "                                    where recipe.id =  fk_recipe_id\n"
-			+ "                                    group by fk_recipe_id\n" + "									\n"
-			+ "                                ) DESC", nativeQuery = true)
+
+	@Query(value = "SELECT * FROM recipe order by\n"
+	  		+ "									(\n"
+	  		+ "                                    select avg(rating)\n"
+	  		+ "                                    from rate \n"
+	  		+ "                                    where recipe.id =  recipe\n"
+	  		+ "                                    group by recipe\n"
+	  		+ "									\n"
+	  		+ "                                ) DESC",
+	            nativeQuery=true)
+
 	public Iterable<Recipe> findByOrderedRating();
 
 	@Query(value = "SELECT * FROM recipe WHERE type = :type",nativeQuery = true)

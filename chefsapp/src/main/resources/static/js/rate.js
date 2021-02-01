@@ -1,28 +1,22 @@
 var list = ['1', '2', '3', '4', '5'];
 list.forEach(rate);
 
- function rate (element) {
-	document.getElementById(element).addEventListener("click", clickStar);
+function rate(element) {
+	document.getElementById(element).addEventListener("click", function() {
+		var starClass = document.getElementById(element).className;
+
+		let num = parseInt(element);//ex:4
+		console.log(num);
+		
+			for (let i = num; i > 0; i--) {
+				document.getElementById(i).classList.remove("unchecked");
+				document.getElementById(i).classList.add("checked");
+			}
+			
+			document.getElementById('rate').value =num;
+		});
 }
 
-function clickStar() {
-		var starClass = document.getElementById(element).className;
-	
 
-		if (starClass.includes("unchecked")) {
-			Number(element);
-			//for(let i=element ; i>0 ; i--){
-				document.getElementById(element).classList.remove("unchecked");
-			document.getElementById(element).classList.add("checked");
-			//}
-
-		}
-		else {
-			document.getElementById(element).classList.remove("checked");
-			document.getElementById(element).classList.add("unchecked");
-		}
-
-	}
-document.getElementById("buttonnew").addEventListener("click", function() {
-	alert("Work in progress");
+document.getElementById("submitRatingBtn").addEventListener("click", function() {
 });
