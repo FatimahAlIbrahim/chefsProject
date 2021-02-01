@@ -1,11 +1,17 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<h1>User Details</h1>
-	<div id="userInfo">
-	<p>First Name: ${user.getFirstName()}</p>
-	<p>Last Name: ${user.getLastName()}</p>
-	<p>Email Address: ${user.getEmailAddress()}</p>
-	<button id="editInfo" type="button">Edit Information</button>
+
+	<p class="h3">Chef Details</p>
+	<div id="userInfo" class="container d-flex flex-row" >
+	<div class="w-25 h-100">
+		<img id="userDetailImage" class="img-fluid img-thumbnail" src="${user.getPicture()}" >
+	</div>
+	<div class="w-75">
+		<p>First Name: ${user.getFirstName()}</p>
+		<p>Last Name: ${user.getLastName()}</p>
+		<p>Email Address: ${user.getEmailAddress()}</p>
+		<button id="editInfo" type="button">Edit Information</button>
+	</div>
 	</div>
 	
 	<div id="editUser" style="display: none;">

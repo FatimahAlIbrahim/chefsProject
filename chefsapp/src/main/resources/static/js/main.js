@@ -26,12 +26,12 @@ $(document).ready(function() {
 
 	$("#ingContainer").on("mouseenter", ".ingItem", function() {
 		$(this).children(".deleteIng").css("display", "inline");
-		$(this).css({"background-color": "#DECFB5", "color": "white"});
+		$(this).css({"background-color": "#F2F3F4", "color": "black"});
 	});
 
 	$("#ingContainer").on("mouseleave", ".ingItem", function() {
 		$(this).children(".deleteIng").css("display", "none");
-		$(this).css({"background-color": "#FEF6E8", "color": "black"});
+		$(this).css({"background-color": "#F8F9F9", "color": "black"});
 	});
 
 	$("#ingContainer").on("click", ".deleteIng", function() {
@@ -51,12 +51,12 @@ $(document).ready(function() {
 
 	$("#instructionsCon").on("mouseenter", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "inline");
-		$(this).css({"background-color": "#DECFB5", "color": "white"});
+		$(this).css({"background-color": "#F2F3F4", "color": "black"});
 	});
 
 	$("#instructionsCon").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
-		$(this).css({"background-color": "#FEF6E8", "color": "black"});
+		$(this).css({"background-color": "#F8F9F9", "color": "black"});
 	});
 
 	$("#instructionsCon").on("click", ".deleteIns", function() {
@@ -102,7 +102,22 @@ $(document).ready(function() {
 
 	$("#pictureUrl").on('change', function() {
 		var newUrl = $(this).val();
-		$("#recipeImg").attr("src", newUrl);
+		if(newUrl == ""){
+			$("#recipeImg").attr("src", "../images/placeholder-image.png");
+		}else{
+			$("#recipeImg").attr("src", newUrl);
+		}
+		
+	});
+	
+	$("#pictureUrlUser").on('change', function() {
+		var newUrl = $(this).val();
+		if(newUrl == ""){
+			$("#userProfileImage").attr("src", "../images/profile.png");
+		}else{
+			$("#userProfileImage").attr("src", newUrl);
+		}
+		
 	});
 
 
