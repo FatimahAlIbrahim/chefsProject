@@ -29,14 +29,14 @@
 	<input name="emailAddress" type="hidden" value="${user.getEmailAddress()}">
 	<input name="role" type="hidden" value="ROLE_USER">
 	<input name="userId" type="hidden" value="${user.getUserId()}">
-	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<button type="submit">Edit</button>
 	</form>
-	</div>
+	</div> 
 	
 	<button id="shareUserButton" type="button">Share Chef</button>
 	<div id="shareUserDiv" style= "display: none;">
 		<p>QR code</p>
-		<img src="${appName}user/detail/qrcode?id=${user.getUserId()}" width="100" height="100">
-		<a href="${appName}user/detail/qrcode/download?id=${user.getUserId()}">Download QRCode</a>
+		<img src="${appName}user/detail/qrcode?email=${user.getEmailAddress()}" width="100" height="100">
+		<a href="${appName}user/detail/qrcode/download?email=${user.getEmailAddress()}">Download QRCode</a>
 	</div>

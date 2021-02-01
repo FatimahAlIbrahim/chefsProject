@@ -1,48 +1,72 @@
 <jsp:include page="../shared/layout.jsp" />
 
+
+<p class="h3">Add Recipe</p>
+
+
 <form id="addRecipe" action="${appName}recipe/add" method="post">
 
-	<img id="recipeImg" src="http://via.placeholder.com/500x250">
-	<div class="form-group">
-		<label>Picture </label> <input id="pictureUrl" type="text" name="picture"
-			class="form-control" required>
+
+	<img class="img-fluid img-thumbnail" id="recipeImg" src="../images/placeholder-image.png">
+	<div class="mb-3">
+		<label class="form-label">Picture URL</label> <input id="pictureUrl" type="text" name="picture" class="form-control" required>
 	</div>
-	
-	<div class="form-group">
-		<label>Name </label> <input type="text" name="name"
-			class="form-control" required>
+
+	<div class="mb-3">
+		<label class="form-label">Name </label> <input type="text" name="name" class="form-control" required>
 	</div>
-	
-	<div class="form-group">
-		<label>Description </label> <input type="text" name="description"
-			class="form-control" required>
+
+	<div class="mb-3">
+		<label class="form-label">Description</label> <input type="text" name="description" class="form-control" required>
 	</div>
-	
-	<div id="ingContainer"></div>
-	<div class="form-group">
-		<label>Ingredients </label>
+
+	<div class="mb-3">
+		<label class="form-label">Ingredients</label>
+		<hr>
+		<div id="ingContainer"></div>
 	</div>
-	<div class="form-group">
-		<label>amount </label> <label>measurement</label> <label>item</label>
+
+	<div class="container" style="margin-left: -1.5%; margin-bottom: 1%;">
+		<div class="row">
+			<div class="col">
+				<label class="form-label">Amount</label>
+			</div>
+			<div class="col">
+				<label class="form-label">Measurement</label>
+			</div>
+			<div class="col">
+				<label class="form-label">Item</label>
+			</div>
+			<div class="col">Action</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="amount" type="number" step=".25" class="form-control">
+			</div>
+			<div class="col">
+				<select class="form-control" id="measurement">
+					<option value="--">--</option>
+					<option value="cup">cup</option>
+					<option value="tsp">tsp</option>
+					<option value="tbsp">tbsp</option>
+					<option value="gram">gram</option>
+					<option value="mL">mL</option>
+				</select>
+			</div>
+			<div class="col">
+				<input id="item" type="text" class="form-control">
+			</div>
+			<div class="col">
+				<button class="btn btn-outline-dark" type="button" id="addIng">Add Ingredient</button>
+			</div>
+		</div>
 	</div>
-	<div class="form-group">
-		<input id="amount" type="number" step=".25" class="form-control">
-		<select id="measurement">
-			<option value="--">--</option>
-			<option value="cup">cup</option>
-			<option value="tsp">tsp</option>
-			<option value="tbsp">tbsp</option>
-			<option value="gram">gram</option>
-			<option value="mL">mL</option>
-		</select> <input id="item" type="text" class="form-control">
-		<button type="button" id="addIng">add ingredient</button>
-	</div>
+
 	<input id="ingredients" type="hidden" name="ingredients">
-	
-	<div class="form-group">
-		<label>Allergy Warnings</label> 
-		<select name="allergyWarnings"
-			multiple="multiple" required>
+
+	<div class="mb-3">
+		<label class="form-label">Allergy Warnings</label> 
+		<select class="form-control" name="allergyWarnings" multiple="multiple" required>
 			<option value="--">--</option>
 			<option value="Milk">Milk</option>
 			<option value="Eggs">Eggs</option>
@@ -53,16 +77,23 @@
 			<option value="Fish">Fish</option>
 		</select>
 	</div>
-	
-	<div class="form-group">
-		<label>Instructions </label> 
-		<input type="text" name="instructions" class="form-control" required>
 
+
+
+	<div class="mb-3">
+		<label class="form-label">Instructions </label>
+		<hr>
+		<div id="instructionsCon"></div>
+		<div class="input-group mb-3">
+			<input id="instructionsText" type="text" class="form-control">
+			<button class="btn btn-outline-dark" type="button" id="addIns">add Instructions</button>
+		</div>
+		<input id="instructions" type="hidden" name="instructions">
 	</div>
-	
-	<div class="form-group">
-		<label>Cuisine</label> 
-		<select name="cuisine">
+
+	<div class="mb-3">
+		<label class="form-label">Cuisine</label> 
+		<select class="form-control" name="cuisine">
 			<option value="General">General</option>
 			<option value="Arabic">Arabic</option>
 			<option value="Indian">Indian</option>
@@ -72,10 +103,9 @@
 			<option value="Japanese">Japanese</option>
 		</select>
 	</div>
-	
-	<div class="form-group">
-		<label>Type</label> 
-		<select name="type">
+
+	<div class="mb-3">
+		<label class="form-label">Type</label> <select class="form-control" name="type">
 			<option value="soup">Soup</option>
 			<option value="appetizer">Appetizer</option>
 			<option value="salad">Salad</option>
@@ -83,30 +113,46 @@
 			<option value="dessert">Dessert</option>
 		</select>
 	</div>
-	
-	<div class="form-group">
-		<label>duration </label> <input id="durationNumber" type="number" step=".25" class="form-control" required> 
-		<select
-			id="durationType">
-			<option value="Hours">Hours</option>
-			<option value="Minutes">Minutes</option>
-		</select> <input id="duration" type="hidden" name="duration">
+
+	<div class="mb-3">
+		<label class="form-label">Duration </label>
 	</div>
-	
-	<div class="form-group">
-		<label>Servings </label> <input type="number" name="servings"
-			class="form-control" required>
+
+	<div class="container" style="margin-left: -1.5%; margin-bottom: 1%; margin-top: -1.5%;">
+		<div class="row">
+			<div class="col"><label class="form-label">Time </label></div>
+			<div class="col"><label class="form-label">Minute or Hour</label></div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<input id="durationNumber" type="number" step=".25" class="form-control" required>
+			</div>
+			<div class="col">
+				<select class="form-control" id="durationType">
+					<option value="Hour">Hour</option>
+					<option value="Hours">Hours</option>
+					<option value="Minute">Minute</option>
+					<option value="Minutes">Minutes</option>
+				</select>
+			</div>
+		</div>
 	</div>
-	
-	<div class="form-group">
-		<label>Calories </label> <input type="number" name="calories" class="form-control" required>
+	<input id="duration" type="hidden" name="duration">
+
+	<div class="mb-3">
+		<label class="form-label">Servings </label> 
+		<input type="number" name="servings" class="form-control" required>
 	</div>
-	
-	<input type="hidden" name="user" value="${userId}" >
-	
+
+	<div class="mb-3">
+		<label class="form-label">Calories</label> 
+		<input type="number" name="calories" class="form-control" required>
+	</div>
+
+	<input type="hidden" name="user" value="${userId}"> 
 	
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	
+
 	<button id="submit" type="submit" class="btn btn-primary">Submit</button>
-	
+
 </form>

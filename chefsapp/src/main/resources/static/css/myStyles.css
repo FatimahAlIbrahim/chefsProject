@@ -1,4 +1,61 @@
 @charset "ISO-8859-1";
+
+
+form {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.h3 {
+	margin-top: 5%;
+	margin-bottom: 2%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.carousel-item, .carousel-image {
+	height: 100vh;
+	min-height: 300px;
+	background: no-repeat center center scroll;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.carousel-caption {
+	top: 50%; 
+	transform : translateY( -50%); 
+	bottom: initial;
+	color : black;
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 3px;
+	font-weight: 600;
+	color: black;
+	transform: translateY(-50%);
+}
+
+.carousel-caption h5 {
+	font-size: 1.5em;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+}
+
+#recipeImg {
+	width: 100%;
+	height: 50vh;
+	margin-bottom: 2%;
+}
+
+.insItem, .ingItem {
+	border: solid gray;
+	padding: 1%;
+	border-radius: 5px;
+	background-color: #FEF6E8;
+	font-weight: 600;
+}
+
+#ingContainer, #instructionsCon {
+	padding: 1%;
+}
 .fa
 {
   font-size:30px !important;
@@ -15,4 +72,5 @@
 .btn:hover
 {
   cursor:pointer;
+
 }
