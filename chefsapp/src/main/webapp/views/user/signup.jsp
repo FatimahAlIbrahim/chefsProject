@@ -1,29 +1,32 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
+
+<p class="h3">Sign Up</p>
+
 <form action="${appName}user/signup" method="post">
 
-	<div>
-		<label>First Name</label>
-		<input name="firstName" type="text" required>
+	<div class="mb-3">
+		<label class="form-label">First Name</label>
+		<input name="firstName" type="text" class="form-control" required>
 	</div>
 
-	<div>
-		<label>Last Name</label>
-		<input name="lastName" type="text" required>
+	<div class="mb-3">
+		<label class="form-label">Last Name</label>
+		<input name="lastName" type="text" class="form-control" required>
 	</div>
 	
-	<div>
-		<label>Email Address</label>
-		<input name="emailAddress" type="email" required>
+	<div class="mb-3">
+		<label class="form-label">Email Address</label>
+		<input name="emailAddress" type="email" class="form-control" required>
 	</div>
 	
-	<div>
-		<label>Password</label>
-		<input name="password" type="password" required>
+	<div class="mb-3">
+		<label class="form-label">Password</label>
+		<input name="password" type="password" class="form-control" required>
 	</div>
 	
 	<input name="role" type="hidden" value="ROLE_USER">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
-	<button type="submit">Submit</button>
+	<button type="submit" class="btn btn-primary mb-3">Submit</button>
 
 </form>

@@ -5,10 +5,10 @@
 	<p>First Name: ${user.getFirstName()}</p>
 	<p>Last Name: ${user.getLastName()}</p>
 	<p>Email Address: ${user.getEmailAddress()}</p>
-	<!-- <button id="editInfo" type="button">Edit Information</button> -->
+	<button id="editInfo" type="button">Edit Information</button>
 	</div>
 	
-	<%-- <div id="editUser" style="display: none;">
+	<div id="editUser" style="display: none;">
 	
 	<form action="${appName}user/edit" method="post">
 	<div>
@@ -29,10 +29,10 @@
 	<input name="emailAddress" type="hidden" value="${user.getEmailAddress()}">
 	<input name="role" type="hidden" value="ROLE_USER">
 	<input name="userId" type="hidden" value="${user.getUserId()}">
-	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<button type="submit">Edit</button>
 	</form>
-	</div> --%>
+	</div> 
 	
 	<button id="shareUserButton" type="button">Share Chef</button>
 	<div id="shareUserDiv" style= "display: none;">

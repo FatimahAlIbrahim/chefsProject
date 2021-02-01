@@ -126,18 +126,14 @@ public class UserController {
 		
 	}
 
-//	@PostMapping("/user/edit")
-//	public String userEdit(User user, Principal principal) {
-//		UserDetailsImpl udi = (UserDetailsImpl) principal;
-//		if(udi.getUsername().equals(user.getEmailAddress())) {
-//			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-//			String newPassword = bCrypt.encode(user.getPassword());
-//			user.setPassword(newPassword);
-//			userDao.save(user);
-//			return "redirect:/user/detail?email=" + user.getEmailAddress();
-//		}
-//		return "redirect:/user/detail?email=" + user.getEmailAddress();
-//	}
+	@PostMapping("/user/edit")
+	public String userEdit(User user, Principal principal) {
+			BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+			String newPassword = bCrypt.encode(user.getPassword());
+			user.setPassword(newPassword);
+			userDao.save(user);
+			return "redirect:/user/detail?email=" + user.getEmailAddress();
+	}
 
 	@GetMapping("/user/delete")
 	public String userDelete(@RequestParam int id) {
