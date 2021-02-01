@@ -6,18 +6,21 @@
 <form action="${appName}recipe/add" method="post">
 
 	<div class="form-group">
-		<label>Recipe Title </label> <input type="text" name="title"
-			value="${recipe.name}" class="form-control">
+
+		<label>Recipe name </label> <input type="text" name="title" value="${recipe.name}" class="form-control">
 	</div>
 
-	<div class="form-group">
+	<div> 
+	<p>${recipe.type}</p>
+		<lable> from ${recipe.cuisine} cuisine  </lable>
+        <lable> Enough for ${recipe.servings}  persons </lable>
+	   <lable>   Ingredients   </lable>
+	    <p> ${recipe.ingredients} </p>
+	    <lable> description </lable>
+		<p> ${recipe.description}</p>
+		 <lable> description </lable>
+		<p>${recipe.calories}</p>
 
-		<label>Recipe Type</label> <input type="text" name="description" value="${recipe.type}" class="form-control">
-		<label>Recipe cusisne </label> <input type="text" name="description" value="${recipe.cusisne}" class="form-control">
-		<label>Recipe type </label> <input type="text" name="description" value="${recipe.servings}" class="form-control">
-		<label>Recipe ingredients </label> <input type="text" name="description" value="${recipe.ingredients}" class="form-control">
-		<label>Recipe description </label> <input type="text" name="description" value="${recipe.description}" class="form-control">
-		<label>Recipe calories </label> <input type="text" name="description" value="${recipe.calories}" class="form-control">	
 	</div>
 
 	<div class="form-group">

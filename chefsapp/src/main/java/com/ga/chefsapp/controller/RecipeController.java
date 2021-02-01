@@ -73,6 +73,17 @@ public class RecipeController {
 		return "redirect:/recipe/index";
 	}
 
+	
+	
+
+	// HTTP GET REQUEST - Recipe Detail
+	@GetMapping("/recipe/detail")
+	public ModelAndView recipeDetails(@RequestParam int id) {
+	System.out.println(id);
+	
+	Recipe recipe = dao.findById(id);
+		
+
 	// HTTP GET REQUEST - Recipe Index
 	@GetMapping("/recipe/index")
 	public ModelAndView getRecipe() {
@@ -81,9 +92,9 @@ public class RecipeController {
 		mv.setViewName("recipe/index");
 		mv.addObject("recipes", it);
 
-//		HomeController hc = new HomeController();
-//		hc.setAppName(mv, env);
-//		
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
+		
 		return mv;
 	}
 
@@ -97,6 +108,7 @@ public class RecipeController {
 		String email = authentication.getName();
 		User user = userDao.findByEmailAddress(email);
 		boolean flag = true;
+
 		ModelAndView mv = new ModelAndView();
 
 		if (user != null) {
@@ -112,7 +124,8 @@ public class RecipeController {
 
 		}
 
-		mv.setViewName("recipe/detail");
+		mv.setViewName("recipe/detail");		
+
 
 		mv.addObject("recipe", recipe);
 		mv.addObject("flag", flag);
@@ -149,6 +162,45 @@ public class RecipeController {
 
 //			
 
+			
+			
+			return mv;
+		}
+		
+		// HTTP GET REQUEST - Recipe Delete
+		@GetMapping("/recipe/delete")
+		public String deleteRecipe(@RequestParam int id) {
+					
+	dao.deleteById(id);
+			return "redirect:/recipe/index";
+		}
+		
+		
+		// HTTP Get REQUEST - Select Recipe
+		@GetMapping("/recipe/index")
+		public ModelAndView recipeSelectrecipe(@RequestParam String first) {
+		System.out.println(first);
+		var recipes= dao.findByOrderedRating();	
+		if (first.equals("All")) {
+			
+ recipes = dao.findByOrderedRating();
+		}
+		else {	recipes = dao.findByTypeParams(first);}
+	
+			ModelAndView mv = new ModelAndView();
+//			mv.setViewName("recipe/selectrecipe");
+			mv.setViewName("recipe/index");
+		mv.addObject("recipes", recipes);
+		
+			HomeController hc = new HomeController();
+		     hc.setAppName(mv, env);
+			
+			return mv;
+			
+		}	
+	}	
+
+
 		return mv;
 	}
 
@@ -161,3 +213,4 @@ public class RecipeController {
 	}
 
 }
+
