@@ -61,9 +61,24 @@
         <p class="card-text">${recipe.servings}</p>
       </div>
       <div class="card-footer">
-      
-        <small class="text-muted">${rates[0][status.index]}</small>
+   <c:forEach var="i" begin="1" end="${rates[0][status.index]}" step="1">
+   <i class="fa fa-star checked" id=i></i>
+</c:forEach>
+   <c:forEach var="i" begin="1" end="${5-rates[0][status.index]}" step="1">
+   <i class="fa fa-star unchecked" id=i></i>
+</c:forEach>
+   <!--    <div class="main">
+	 <i class="fa fa-star unchecked" id="1"></i> 
+   <i class="fa fa-star unchecked" id="2"></i>
+   <i class="fa fa-star unchecked" id="3"></i>
+   <i class="fa fa-star unchecked" id="4"></i>
+   <i class="fa fa-star unchecked" id="5"></i>
+	</div> -->
+     <%--    <small class="text-muted">${rates[0][status.index]}</small> --%>
       </div>
+       <div class="card-footer">
+       gfgdfhfg
+       </div>
     </div>
   </div>
 
@@ -74,21 +89,4 @@
 </div>
 </div>
 
-<%-- <td><a href="${appName}doctor/edit?id=${doctor.id}">Edit</a> | <a
-				href="${appName}doctor/delete?id=${doctor.id}">Delete</a></td> --%>
 
-
-<%-- <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-      <img src="${recipe.picture }" class="card-img-top" alt="...">
-      <div class="card-body">
-       	<a href="${appName}recipe/detail?id=${recipe.id}"> <h5 class="card-title">${recipe.name }</h5> </a>
-        <p class="card-text">${recipe.servings}</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>
-  </div>
-</div> --%>

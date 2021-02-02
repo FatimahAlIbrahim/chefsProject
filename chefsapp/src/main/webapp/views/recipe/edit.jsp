@@ -29,7 +29,7 @@
 	<div class="container" style="margin-left: -1.5%; margin-bottom: 1%;">
 		<div class="row">
 			<div class="col">
-				<label class="form-label">Amount</label>
+				<label class="form-label" >Amount</label>
 			</div>
 			<div class="col">
 				<label class="form-label">Measurement</label>
@@ -85,7 +85,7 @@
 		<hr>
 		<div id="instructionsCon"></div>
 		<div class="input-group mb-3">
-			<input id="instructionsText" type="text" class="form-control">
+			<input id="instructionsText" type="text" class="form-control" >
 			<button class="btn btn-outline-dark" type="button" id="addIns">add Instructions</button>
 		</div>
 		<input id="instructions" type="hidden" name="instructions">
