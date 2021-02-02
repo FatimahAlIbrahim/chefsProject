@@ -128,5 +128,10 @@ $(document).ready(function() {
 			$("#userProfileImageEdit").attr("src", newUrl);
 		}
 	});
+	
+		$("#shareRecipeButton").on('click', function() {
+		console.log("clicked")
+		$("#shareUserDiv").toggle();
+	});
 
 });

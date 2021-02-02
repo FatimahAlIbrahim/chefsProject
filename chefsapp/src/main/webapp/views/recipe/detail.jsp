@@ -15,80 +15,81 @@
 	<div class="row">
 
 
-		<div class="col">
+		<div class="col" id="recipeDetailImg">
 			<img alt="recipeImg" src="${ recipe.picture}">
 		</div>
 
-		<div class="row">
-			<div class="col">
-				<h1>Hiii ${ recipe.name}</h1>
-			</div>
-		</div>
-		<div class="row">
+		<div class="w-100"></div>
 
-			<div class="col">${recipe.cuisine}</div>
-			<div class="col">${recipe.duration}</div>
-			<div class="col">${recipe.servings}</div>
-			<div class="col">${recipe.calories}</div>
-			<div class="col">${recipe.allergyWarnings}</div>
-			<div class="col">${recipe.type}</div>
-		</div>
-		<div class="row">
-
-			<div class="col">${recipe.description}</div>
-		</div>
-		<div class="row">
-
-			<div class="col">${recipe.ingredients}</div>
-			<div class="col">${recipe.instructions}</div>
+		<div class="col">
+			<h1 id="recipeDetailName">Hiii ${ recipe.name}</h1>
 		</div>
 
+		<div class="w-100"></div>
 
-<!-- 		<div class="w-100"></div>
- -->		
+
+		<div class="col">
+			<span>cuisine</span> ${recipe.cuisine}
+		</div>
+		|
+		<div class="col">
+			<span>duration</span> ${recipe.duration}
+		</div>
+		|
+		<div class="col">
+			<span>servings</span> ${recipe.servings}
+		</div>
+		|
+		<div class="col">
+			<span>calories</span> ${recipe.calories}
+		</div>
+		|
+		<div class="col">
+			<span>allergyWarnings</span> ${recipe.allergyWarnings}
+		</div>
+		|
+		<div class="col">
+			<span>type</span> ${recipe.type}
+		</div>
+		<div class="w-100"></div>
+
+		<div class="col" id="recipeDescription">${recipe.description}</div>
+		<div class="w-100"></div>
+
+		<div class="col" id="ingredients">
+			<h2>Ingredients</h2>${recipe.ingredients}</div>
+		<div class="col" id="instructions">
+			<h2>Instructions</h2>${recipe.instructions}</div>
+
 	</div>
+	<div class="w-25 h-100" style="margin: 0 auto;">
+	<button id="shareRecipeButton" type="button"
+		class="btn btn-outline-dark w-100">Share Recipe</button>
+	<div id="shareUserDiv" style="display: none;">
+	<div class="card text-center">
+		<img src="${appName}recipe/detail/qrcode?id=${recipe.getId()}"
+			width="100" height="100" class="card-img-top"> 
+			<div class="card-body">
+						<h5 class="card-title">QRCode</h5>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted">
+			<a
+			href="${appName}recipe/detail/qrcode/download?id=${recipe.getId()}">
+			<button class="btn btn-outline-dark" type="button">Download
+									QRCode</button></a>
+			
+			
+			</small>
+					</div>
+			</div>
+	</div>
+	</div>
+
 </div>
 
 <!-- --------------------------------------- -->
 
-<%-- 	   
-
-	<div> 
-	<p>${recipe.type}</p>
-		<lable> from ${recipe.cuisine} cuisine  </lable>
-        <lable> Enough for ${recipe.servings}  persons </lable>
-	   <lable>   Ingredients   </lable>
-	    <p> ${recipe.ingredients} </p>
-	    <lable> description </lable>
-		<p> ${recipe.description}</p>
-		 <lable> description </lable>
-		<p>${recipe.calories}</p>
-
-	</div>
-
-	<div class="form-group">
-		<label>User</label> <select name="users" class="form-control"
-			multiple="multiple">
-			<c:forEach items="${users}" var="user">
-				<option value="${user.id}">${user.name}</option>
-			</c:forEach>
-		</select>
-	</div> --%>
-
-
-
-
-<!-- <button type="submit">Submit</button> -->
-
-
-<button id="shareUserButton" type="button">Share Recipe</button>
-<div id="shareUserDiv" style="display: none;">
-	<p>QR code</p>
-	<img src="${appName}recipe/detail/qrcode?id=${recipe.getId()}"
-		width="100" height="100"> <a
-		href="${appName}recipe/detail/qrcode/download?id=${recipe.getId()}">Download
-		QRCode</a>
-</div>
 <!--user rating -->
 <security:authorize access="isAuthenticated()">
 
