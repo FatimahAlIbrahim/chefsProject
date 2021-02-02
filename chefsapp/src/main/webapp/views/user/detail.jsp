@@ -1,48 +1,121 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
-	<p class="h3">Chef Details</p>
-	<div id="userInfo" class="container d-flex flex-row" >
-	<div class="w-25 h-100">
-		<img id="userDetailImage" class="img-fluid img-thumbnail" src="${user.getPicture()}" >
+<p id="title" class="h3" style="margin-left: 11%;">Chef Details</p>
+<div id="userInfo" class="container">
+	<div class="container d-flex flex-row"
+		style="border-bottom: solid; border-left-color: lightgray; border-width: thin;">
+		<div class="w-25 h-100" style="margin-left: -1.5%;">
+			<img id="userDetailImage" class="img-fluid img-thumbnail"
+				src="${user.getPicture()}">
+		</div>
+		<div class="w-50 d-flex flex-column"
+			style="margin-left: 2%; border-left: solid; border-left-color: lightgray; border-width: thin; padding-left: 2%;">
+			<p class="detailP">
+				<i class="bi bi-person-fill"></i><span> Name:
+					${user.getFirstName()} ${user.getLastName()}</span>
+			</p>
+			<p class="detailP">
+				<i class="bi bi-envelope"></i></i><span> Email:
+					${user.getEmailAddress()}</span>
+			</p>
+			<p class="detailP">
+				<i class="bi bi-file-text"></i></i><span> Number of added
+					recipes: ${count}</span>
+			</p>
+			<security:authorize access="isAuthenticated()">
+				<c:if test="${flag}">
+					<button id="editInfo" type="button"
+						class="btn btn-outline-dark w-50">Edit Information</button>
+				</c:if>
+			</security:authorize>
+		</div>
+		<div class="w-25 h-100" style="margin-left: 2%;">
+			<button class="btn btn-outline-dark w-100" id="shareUserButton"
+				type="button">Share Chef</button>
+			<div id="shareUserDiv" style="display: none;">
+				<div class="card text-center">
+					<img
+						src="${appName}user/detail/qrcode?email=${user.getEmailAddress()}"
+						class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">QRCode</h5>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted"> <a
+							href="${appName}user/detail/qrcode/download?email=${user.getEmailAddress()}">
+								<button class="btn btn-outline-dark" type="button">Download
+									QRCode</button>
+						</a>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="w-75">
-		<p>First Name: ${user.getFirstName()}</p>
-		<p>Last Name: ${user.getLastName()}</p>
-		<p>Email Address: ${user.getEmailAddress()}</p>
-		<button id="editInfo" type="button">Edit Information</button>
-	</div>
-	</div>
-	
-	<div id="editUser" style="display: none;">
-	
-	<form action="${appName}user/edit" method="post">
-	<div>
-		<label>First Name</label>
-		<input name="firstName" type="text" value="${user.getFirstName()}">
-	</div>
+	<c:if test="${count != 0}">
+		<p class="h5" style="margin-top: 2%; margin-bottom: 1%;">Recipes</p>
+		<div class="row row-cols-1 row-cols-md-3">
+			<c:forEach items="${recipes}" var="recipe">
+				<div class="col mb-4">
+					<div class="card h-100">
+						<img src="${recipe.picture}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">
+								<a href="${appName}recipe/detail?id=${recipe.id}">${recipe.name }</a>
+							</h5>
+							<p class="card-text">${recipe.servings}</p>
+						</div>
+						<div class="card-footer">
+							<small class="text-muted">Last updated 3 mins ago</small>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</c:if>
 
-	<div>
-		<label>Last Name</label>
-		<input name="lastName" type="text" value="${user.getLastName()}">
-	</div>
-	
-	<div>
-		<label>Password</label>
-		<input name="password" type="password">
-	</div>
-	
-	<input name="emailAddress" type="hidden" value="${user.getEmailAddress()}">
-	<input name="role" type="hidden" value="ROLE_USER">
-	<input name="userId" type="hidden" value="${user.getUserId()}">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	<button type="submit">Edit</button>
-	</form>
-	</div> 
-	
-	<button id="shareUserButton" type="button">Share Chef</button>
-	<div id="shareUserDiv" style= "display: none;">
-		<p>QR code</p>
-		<img src="${appName}user/detail/qrcode?email=${user.getEmailAddress()}" width="100" height="100">
-		<a href="${appName}user/detail/qrcode/download?email=${user.getEmailAddress()}">Download QRCode</a>
-	</div>
+</div>
+
+<security:authorize access="isAuthenticated()">
+	<c:if test="${flag}">
+		<div id="editUser" style="display: none;">
+			<p class="h3">Edit Information</p>
+			<form action="${appName}user/edit" method="post">
+				<img class="img-fluid img-thumbnail" id="userProfileImageEdit"
+					src="${user.getPicture()}">
+				<div class="mb-3">
+					<label class="form-label">Picture URL</label> <input
+						id="pictureUrlUserEdit" type="text" name="picture"
+						class="form-control" value="${user.getPicture()}" required>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">First Name</label> <input
+						name="firstName" type="text" class="form-control"
+						value="${user.getFirstName()}" required>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Last Name</label> <input name="lastName"
+						type="text" class="form-control" value="${user.getLastName()}"
+						required>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Password</label> <input name="password"
+						type="password" class="form-control" required>
+				</div>
+
+				<input name="emailAddress" type="hidden"
+					value="${user.getEmailAddress()}"> <input name="role"
+					type="hidden" value="ROLE_USER"> <input name="userId"
+					type="hidden" value="${user.getUserId()}"> <input
+					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<button id="editBtn" type="submit" class="btn btn-primary mb-3">Edit</button>
+			</form>
+		</div>
+	</c:if>
+</security:authorize>
