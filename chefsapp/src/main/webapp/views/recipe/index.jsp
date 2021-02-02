@@ -3,9 +3,9 @@
 
 
 <div class="container-fluid" style ="height: 100vh;">
-	<h1>Hello World!</h1>
+	<h1></h1>
 	<div class="row">
-		<div class="col-sm-2" style="background-color: yellow;">
+		<div class="col-sm-2" >
 			<p>Select the type of meal </p>
 			
 			<form  action="${appName}recipe/index" method="get" >
@@ -44,7 +44,7 @@
 	<button id="submit" type="submit" class="btn btn-primary">Filter</button>
 		</form>
 		</div>
-		<div class="col-sm-10" style="background-color: pink;">
+		<div class="col-sm-10">
 <%-- <%! String[] tayps; %>
 <% 
    tayps = request.getParameterValues("first");

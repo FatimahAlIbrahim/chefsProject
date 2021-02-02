@@ -22,15 +22,14 @@ public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 	  		+ "                                    where recipe.id =  recipe\n"
 	  		+ "                                    group by recipe\n"
 	  		+ "									\n"
-	  		+ "                                ) DESC",
-	            nativeQuery=true)
+	  		+ "                                ) DESC",nativeQuery=true)
 
 	public Iterable<Recipe> findByOrderedRating();
 
 	@Query(value = "SELECT * FROM recipe WHERE type = :type",nativeQuery = true)
 	public Iterable<Recipe> findByTypeParams(@Param("type") String type);
 
-//	public Recipe  findByTypeParams(String type);
+	//public Recipe  findByTypeParams(String type);
 	public Recipe findById(int id);
 
 }
