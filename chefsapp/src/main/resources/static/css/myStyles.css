@@ -100,8 +100,16 @@ form, #userInfo {
   cursor:pointer;
 
 }
+<<<<<<< HEAD
 /* #chefsTable{ */
 	
 	/* margin:100px 50px 0 50px; */
 /* } */
 
+=======
+
+.navbar{
+	margin-bottom:5%;
+	display:block;
+}
+>>>>>>> f46142fb59dc2b6a0811150f17062ba59f412a47
