@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.ga.chefsapp.dao.RateDao;
 import com.ga.chefsapp.dao.RecipeDao;
 import com.ga.chefsapp.dao.UserDao;
@@ -70,7 +72,6 @@ public class RecipeController {
 
 	}
 
-
 	// HTTP GET REQUEST - Recipe Detail
 	@GetMapping("/recipe/detail")
 	public ModelAndView recipeDetails(@RequestParam int id) {
@@ -90,17 +91,14 @@ public class RecipeController {
 			mv.addObject("currentUser", user.getUserId());
 		}
 
-
 		mv.setViewName("recipe/detail");
 
 		mv.addObject("recipe", recipe);
 		mv.addObject("flag", flag);
 
-
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 		return mv;
-
 
 	}
 
@@ -114,16 +112,16 @@ public class RecipeController {
 
 	}
 
-
 	// HTTP GET REQUEST - Recipe Edit
 	@GetMapping("/recipe/edit")
 	public ModelAndView editRecipe(@RequestParam int id) {
-			Recipe recipe = dao.findById(id);
+		Recipe recipe = dao.findById(id);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/edit");
-			mv.addObject("recipe",recipe);
-			HomeController hc = new HomeController();
-			hc.setAppName(mv, env);
+		mv.addObject("recipe", recipe);
+
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
 		return mv;
 	}
 
@@ -131,41 +129,40 @@ public class RecipeController {
 	@GetMapping("/recipe/delete")
 	public String deleteRecipe(@RequestParam int id) {
 		dao.deleteById(id);
-		return "redirect:/recipe/index";
+		return "redirect:/recipe/index?first=All";
 	}
 
 	// HTTP Get REQUEST - Select Recipe
 	@GetMapping("/recipe/index")
 	public ModelAndView getRecipe(@RequestParam String first) {
 
-	
 		var recipes = dao.findByOrderedRating();
 		if (first.equals("All")) {
 
-
- recipes = dao.findByOrderedRating();
+			recipes = dao.findByOrderedRating();
+		} else {
+			recipes = dao.findByTypeParams(first);
 		}
-		else {	recipes = dao.findByTypeParams(first);}
 		ArrayList<Integer> ratelist = new ArrayList<>();
-for (Recipe recipe : recipes) {
-	if(rateDao.findByRecipeAvg(recipe) != null)
-	{ratelist.add(rateDao.findByRecipeAvg(recipe));}
-	else 
-	{ratelist.add(0);}
-			
-}
-var rateIt =Arrays.asList(ratelist);
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("recipe/index");
-		mv.addObject("recipes", recipes);
-		mv.addObject("rates",rateIt);
-			HomeController hc = new HomeController();
-		     hc.setAppName(mv, env);
-
-			return mv;
+		for (Recipe recipe : recipes) {
+			if (rateDao.findByRecipeAvg(recipe) != null) {
+				ratelist.add(rateDao.findByRecipeAvg(recipe));
+			} else {
+				ratelist.add(0);
+			}
 
 		}
-}
+		var rateIt = Arrays.asList(ratelist);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("recipe/index");
+		mv.addObject("recipes", recipes);
+		mv.addObject("rates", rateIt);
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
+
+		return mv;
+
+	}
 
 	@GetMapping("/recipe/detail/qrcode")
 	public void qrcode(@RequestParam int id, HttpServletResponse response) throws Exception {
@@ -180,15 +177,15 @@ var rateIt =Arrays.asList(ratelist);
 
 	@GetMapping("/recipe/detail/qrcode/download")
 	public String downloadQRCode(@RequestParam int id, HttpServletResponse response) {
-		String appName = env.getProperty("app.name");
 		Recipe recipe = dao.findById(id);
 		String fileName = recipe.getName() + "Recipe ";
+		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 
 		try {
-			URL url = new URL("http://localhost:8082" + appName + "recipe/detail/qrcode?id=" + id);
+			URL url = new URL(baseUrl + "/recipe/detail/qrcode?id=" + id);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(
@@ -209,5 +206,3 @@ var rateIt =Arrays.asList(ratelist);
 	}
 
 }
-		
-

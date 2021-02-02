@@ -12,19 +12,26 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
 	integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="../css/myStyles.css">
 <link rel="stylesheet" href="css/myStyles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
-integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+	<nav class="navbar navbar-expand-lg navbar-light "
+		style="background-color: #7d0633;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${appName}"> <img id="logo"
-				src="images/chef.png" width="30" height="24"
+				src="images/chefs.svg" width="30" height="24"
 				class="d-inline-block align-top"> Chefs
 			</a>
 			<button class="navbar-toggler" type="button"
@@ -72,18 +79,14 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 		</div>
 	</nav>
 
-
-
-
-<hr>
-<c:if test="${addRecipeMessage != null}">
+	<c:if test="${addRecipeMessage != null}">
 		<div class="alert alert-success fade show" role="alert">
 			${addRecipeMessage}</div>
 		<%
 		session.removeAttribute("addRecipeMessage");
 		%>
 	</c:if>
-	
+
 	<c:if test="${addRatingMessage != null}">
 		<div class="alert alert-success fade show" role="alert">
 			${addRatingMessage}</div>
@@ -91,7 +94,7 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 		session.removeAttribute("addRatingMessage");
 		%>
 	</c:if>
-	
+
 	<c:if test="${signupFailMessage != null}">
 		<div class="alert alert-danger show" role="alert">
 			${signupFailMessage}</div>
@@ -99,7 +102,7 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 		session.removeAttribute("signupFailMessage");
 		%>
 	</c:if>
-	
+
 	<c:if test="${signupSuccessMessage != null}">
 		<div class="alert alert-success fade show" role="alert">
 			${signupSuccessMessage}</div>
@@ -107,31 +110,31 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 		session.removeAttribute("signupSuccessMessage");
 		%>
 	</c:if>
-	
-		<c:if test="${loginSuccessMessage != null}">
+
+	<c:if test="${loginSuccessMessage != null}">
 		<div class="alert alert-success fade show" role="alert">
 			${loginSuccessMessage}</div>
 		<%
 		session.removeAttribute("loginSuccessMessage");
 		%>
 	</c:if>
-	
+
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		$('.fade').slideUp(5000);
 	</script>
 
-	 <script src="https://code.jquery.com/jquery-3.5.1.js"
+	<script src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 		crossorigin="anonymous"></script>
 	<script src="../js/main.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
-<!-- 	JavaScript Bundle with Popper
- -->	<script
+	
+	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
 		crossorigin="anonymous"></script>
- 
+
 
 </body>
 </html>
