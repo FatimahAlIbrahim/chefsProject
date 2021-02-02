@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <p>${recipe.type}|</p>
             <p>${recipe.servings}</p>
-              <p>${recipe.calories}</p>
+            <p>${recipe.calories}</p>
             <p>${recipe.description}</p>
             <p>${recipe.ingredients}</p>
             <p>${recipe.allergyWarnings}</p>

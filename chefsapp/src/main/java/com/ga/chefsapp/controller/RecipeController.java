@@ -1,4 +1,5 @@
 package com.ga.chefsapp.controller;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,6 +8,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +30,7 @@ import com.ga.chefsapp.helpers.ZXingHelper;
 import com.ga.chefsapp.model.Rate;
 import com.ga.chefsapp.model.Recipe;
 import com.ga.chefsapp.model.User;
+
 @Controller
 public class RecipeController {
 	@Autowired
@@ -38,30 +43,29 @@ public class RecipeController {
 	private RateDao rateDao;
 	@Autowired
 	HttpServletRequest request;
-	
+
 // HTTP GET REQUEST - Recipe Add
 	@GetMapping("/recipe/add")
 	public ModelAndView addRecipe() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/add");
-	
+
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
-		
+
 		User user = userDao.findByEmailAddress(email);
-		mv.addObject("userId",user.getUserId());
-			
+		mv.addObject("userId", user.getUserId());
+
 		return mv;
 	}
-	
-	
+
 	// HTTP POST REQUEST - Recipe Add
 	@PostMapping("/recipe/add")
 	public String addRecipe(Recipe recipe) {
-		dao.save(recipe);	
+		dao.save(recipe);
 		return "redirect:/recipe/index";
 	}
 
@@ -97,29 +101,28 @@ public class RecipeController {
 	@GetMapping("/recipe/detail")
 	public ModelAndView recipeDetails(@RequestParam int id) {
 //		System.out.println(id);
-	System.out.println(id);
+		System.out.println(id);
 
 //		Recipe recipe = dao.findById(id);
-	Recipe recipe = dao.findById(id);
+		Recipe recipe = dao.findById(id);
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/detail");
 //		mv.addObject("recipe", recipe);
-	mv.addObject("recipe", recipe);
+		mv.addObject("recipe", recipe);
 
 //		HomeController hc = new HomeController();
 //		hc.setAppName(mv, env);
 		HomeController hc = new HomeController();
-	     hc.setAppName(mv, env);
+		hc.setAppName(mv, env);
 
 		return mv;
 	}
 // public String deleteRecipe(@RequestParam int id) {
 //		}
 
-
-		// HTTP Get REQUEST - Select Recipe
-		@GetMapping("recipe/index")
+	// HTTP Get REQUEST - Select Recipe
+	@GetMapping("recipe/index")
 		public ModelAndView recipeSelectrecipe(@RequestParam String first) {
 		System.out.println(first);
 		var recipes= dao.findByOrderedRating();	
@@ -128,16 +131,25 @@ public class RecipeController {
  recipes = dao.findByOrderedRating();
 		}
 		else {	recipes = dao.findByTypeParams(first);}
-
+		ArrayList<Integer> ratelist = new ArrayList<>();
+for (Recipe recipe : recipes) {
+	if(rateDao.findByRecipeAvg(recipe) != null)
+	{ratelist.add(rateDao.findByRecipeAvg(recipe));}
+	else 
+	{ratelist.add(0);}
+			
+}
+var rateIt =Arrays.asList(ratelist);
+System.out.println(rateIt);
 			ModelAndView mv = new ModelAndView();
-//			mv.setViewName("recipe/selectrecipe");
+			mv.setViewName("recipe/selectrecipe");
 			mv.setViewName("recipe/index");
 		mv.addObject("recipes", recipes);
-
+		mv.addObject("rates",rateIt);
 			HomeController hc = new HomeController();
 		     hc.setAppName(mv, env);
 
 			return mv;
 
-		}	
-	}	 
+		}
+}

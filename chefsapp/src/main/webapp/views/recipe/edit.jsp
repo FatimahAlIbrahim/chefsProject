@@ -9,15 +9,15 @@
 
 	<img class="img-fluid img-thumbnail" id="recipeImg" src="../images/placeholder-image.png">
 	<div class="mb-3">
-		<label class="form-label">Picture URL</label> <input id="pictureUrl" type="text" name="picture" class="form-control">
+		<label class="form-label">Picture URL</label> <input id="pictureUrl" type="text" name="picture" class="form-control" value= "${recipe.picture}">
 	</div>
 
 	<div class="mb-3">
-		<label class="form-label">Name </label> <input type="text" name="name" class="form-control" required>
+		<label class="form-label">Name </label> <input type="text" name="name" class="form-control" value= "${recipe.name}" required >
 	</div>
 
 	<div class="mb-3">
-		<label class="form-label">Description</label> <input type="text" name="description" class="form-control" required>
+		<label class="form-label">Description</label> <input type="text" name="description" class="form-control" value= "${recipe.Description}" required>
 	</div>
 
 	<div class="mb-3">

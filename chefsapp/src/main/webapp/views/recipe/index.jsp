@@ -51,7 +51,7 @@
 %> --%>
 <div class="row row-cols-1 row-cols-md-3 g-4" >
 
-<c:forEach items="${recipes}" var="recipe">
+<c:forEach items="${recipes}" var="recipe" varStatus="status">
 
 	<div class="col" style= "margin-top:10px; width:25%;">
     <div class="card h-100">
@@ -61,7 +61,8 @@
         <p class="card-text">${recipe.servings}</p>
       </div>
       <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
+      
+        <small class="text-muted">${rates[0][status.index]}</small>
       </div>
     </div>
   </div>
