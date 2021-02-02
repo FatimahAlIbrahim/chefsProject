@@ -12,12 +12,19 @@ public interface UserDao extends CrudRepository<User, Integer>{
 	public User findByEmailAddress(String emailAddress);
 	public User findById(int id);
 	
-	@Query(value="select * from User where user_id=(select fk_user_id from Recipe)", nativeQuery=true)//
-	public Iterable<User> findByFKuserId();
-	
-//	@Query("Select NEW com.ga.chefsapp.model(u.first_name, u.email_address)From user u INNER JOIN recipe r on u.user_id = r.fk_user_id")
 
-//	@Query("Select u.first_name, u.email_address From user u INNER JOIN recipe r on u.user_id = r.fk_user_id")
-//	public  List<User> getChefs();
+	 
+
+	
+//	@Query(value="Select distinct first_name, email_address,user_id\r\n"
+//			+ "From user u\r\n"
+//			+ "INNER JOIN  recipe r on u.user_id = r.fk_user_id ;", nativeQuery=true)
+//	public Iterable<User> findByFKuserId();
+	
+	@Query(value="Select distinct first_name, email_address\r\n"
+			+ "From user u\r\n"
+			+ "INNER JOIN  recipe r on u.user_id = r.fk_user_id ;", nativeQuery=true)
+	public List<Object[]> findByFKuserId();
+
 	
 }
