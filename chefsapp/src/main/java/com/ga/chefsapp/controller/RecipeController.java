@@ -70,33 +70,22 @@ public class RecipeController {
 		HttpSession session = request.getSession();
 		session.setAttribute("addRecipeMessage", "your recipe has been added succssfuly");
 
-		return "redirect:/recipe/index";
+		return "redirect:/recipe/index?first=All";
 	}
 
-	
-	
-
-	// HTTP GET REQUEST - Recipe Detail
-	@GetMapping("/recipe/detail")
-	public ModelAndView recipeDetails(@RequestParam int id) {
-	System.out.println(id);
-	
-	Recipe recipe = dao.findById(id);
-		
-
-	// HTTP GET REQUEST - Recipe Index
-	@GetMapping("/recipe/index")
-	public ModelAndView getRecipe() {
-		var it = dao.findByOrderedRating();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("recipe/index");
-		mv.addObject("recipes", it);
-
-		HomeController hc = new HomeController();
-		hc.setAppName(mv, env);
-		
-		return mv;
-	}
+//	// HTTP GET REQUEST - Recipe Index
+//	@GetMapping("/recipe/index")
+//	public ModelAndView getRecipe() {
+//		var it = dao.findByOrderedRating();
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("recipe/index");
+//		mv.addObject("recipes", it);
+//
+//		HomeController hc = new HomeController();
+//		hc.setAppName(mv, env);
+//
+//		return mv;
+//	}
 
 	// HTTP GET REQUEST - Recipe Detail
 	@GetMapping("/recipe/detail")
@@ -124,12 +113,10 @@ public class RecipeController {
 
 		}
 
-		mv.setViewName("recipe/detail");		
-
+		mv.setViewName("recipe/detail");
 
 		mv.addObject("recipe", recipe);
 		mv.addObject("flag", flag);
-
 
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
@@ -142,7 +129,6 @@ public class RecipeController {
 	@PostMapping("/recipe/detail")
 	public String addRating(Rate rate) {
 		rateDao.save(rate);
-
 		HttpSession session = request.getSession();
 		session.setAttribute("addRatingMessage", "your rating has been added succssfuly");
 		return "redirect:/recipe/detail?id=" + rate.getRecipe().getId();
@@ -159,58 +145,37 @@ public class RecipeController {
 
 //			HomeController hc = new HomeController();
 //			hc.setAppName(mv, env);
-
-//			
-
-			
-			
-			return mv;
-		}
-		
-		// HTTP GET REQUEST - Recipe Delete
-		@GetMapping("/recipe/delete")
-		public String deleteRecipe(@RequestParam int id) {
-					
-	dao.deleteById(id);
-			return "redirect:/recipe/index";
-		}
-		
-		
-		// HTTP Get REQUEST - Select Recipe
-		@GetMapping("/recipe/index")
-		public ModelAndView recipeSelectrecipe(@RequestParam String first) {
-		System.out.println(first);
-		var recipes= dao.findByOrderedRating();	
-		if (first.equals("All")) {
-			
- recipes = dao.findByOrderedRating();
-		}
-		else {	recipes = dao.findByTypeParams(first);}
-	
-			ModelAndView mv = new ModelAndView();
-//			mv.setViewName("recipe/selectrecipe");
-			mv.setViewName("recipe/index");
-		mv.addObject("recipes", recipes);
-		
-			HomeController hc = new HomeController();
-		     hc.setAppName(mv, env);
-			
-			return mv;
-			
-		}	
-	}	
-
-
 		return mv;
 	}
 
 	// HTTP GET REQUEST - Recipe Delete
 	@GetMapping("/recipe/delete")
 	public String deleteRecipe(@RequestParam int id) {
-
 		dao.deleteById(id);
 		return "redirect:/recipe/index";
 	}
 
-}
+	// HTTP Get REQUEST - Select Recipe
+	@GetMapping("/recipe/index")
+	public ModelAndView getRecipe(@RequestParam String first) {
+		System.out.println(first);
+		var recipes = dao.findByOrderedRating();
+		if (first.equals("All")) {
+			recipes = dao.findByOrderedRating();
+		} else {
+			recipes = dao.findByTypeParams(first);
+		}
 
+		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("recipe/selectrecipe");
+		mv.setViewName("recipe/index");
+		mv.addObject("recipes", recipes);
+
+		HomeController hc = new HomeController();
+		hc.setAppName(mv, env);
+
+		return mv;
+
+	}
+
+}

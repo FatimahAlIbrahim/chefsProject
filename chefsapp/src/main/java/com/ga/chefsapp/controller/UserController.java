@@ -11,18 +11,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.ga.chefsapp.dao.RecipeDao;
 import com.ga.chefsapp.dao.UserDao;
@@ -106,6 +110,23 @@ public class UserController {
 			user.setPicture("../images/profile.png");
 		}
 		
+		var recipes = recipeDao.findAllByUser(user);
+		mv.addObject("recipes",recipes);
+		
+		int count = recipeDao.countByUser(user);
+		mv.addObject("count",count);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		boolean flag = false;
+		if(username.equals(user.getEmailAddress())) {
+			flag = true;
+		}
+		
+		mv.addObject("flag", flag);
+		System.out.println(username);
+		
 		mv.addObject("user", user);
 
 		return mv;
@@ -145,24 +166,27 @@ public class UserController {
 
 	@GetMapping("/user/detail/qrcode")
 	public void qrcode(@RequestParam String email, HttpServletResponse response) throws Exception {
+		String appName= env.getProperty("app.name");
 		response.setContentType("image/png");
 		OutputStream outputStream = response.getOutputStream();
-		outputStream.write(ZXingHelper.getQRCode("/chefsapp/user/detail?email=" + email, 200, 200));
+		outputStream.write(ZXingHelper.getQRCode(appName+"user/detail?email=" + email, 200, 200));
 		outputStream.flush();
 		outputStream.close();
 	}
 
 	@GetMapping("/user/detail/qrcode/download")
-	public String downloadQRCode(@RequestParam String email, HttpServletResponse response) {
-		String appName = env.getProperty("app.name");
+	public String downloadQRCode(@RequestParam String email, HttpServletResponse response) throws MalformedURLException {
+		//String appName = env.getProperty("app.name");
 		User user = userDao.findByEmailAddress(email);
 		String fileName = "Chef " + user.getFirstName() + " " + user.getLastName();
+		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+		System.out.println("url: "+ baseUrl);
 
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 		
 		try {
-			URL url = new URL("http://localhost:8082"+appName + "user/detail/qrcode?email=" + email);
+			URL url = new URL(baseUrl+"/user/detail/qrcode?email=" + email);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(new File(pathToDownloads+System.getProperty("file.separator")+fileName+".png"));
@@ -179,6 +203,7 @@ public class UserController {
 			e.printStackTrace();
 			return "redirect:/user/detail?email=" + user.getEmailAddress();
 		}
+		
 	}
 
 }

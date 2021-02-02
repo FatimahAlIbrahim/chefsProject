@@ -1,9 +1,9 @@
 $(document).ready(function() {
-	
-	if($(location).attr("href").endsWith("/")){
+
+	if ($(location).attr("href").endsWith("/")) {
 		$(logo).attr("src", "images/chef.png");
 	}
-	else{
+	else {
 		$(logo).attr("src", "../images/chef.png");
 	}
 
@@ -26,12 +26,12 @@ $(document).ready(function() {
 
 	$("#ingContainer").on("mouseenter", ".ingItem", function() {
 		$(this).children(".deleteIng").css("display", "inline");
-		$(this).css({"background-color": "#F2F3F4", "color": "black"});
+		$(this).css({ "background-color": "#F2F3F4", "color": "black" });
 	});
 
 	$("#ingContainer").on("mouseleave", ".ingItem", function() {
 		$(this).children(".deleteIng").css("display", "none");
-		$(this).css({"background-color": "#F8F9F9", "color": "black"});
+		$(this).css({ "background-color": "#F8F9F9", "color": "black" });
 	});
 
 	$("#ingContainer").on("click", ".deleteIng", function() {
@@ -51,12 +51,12 @@ $(document).ready(function() {
 
 	$("#instructionsCon").on("mouseenter", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "inline");
-		$(this).css({"background-color": "#F2F3F4", "color": "black"});
+		$(this).css({ "background-color": "#F2F3F4", "color": "black" });
 	});
 
 	$("#instructionsCon").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
-		$(this).css({"background-color": "#F8F9F9", "color": "black"});
+		$(this).css({ "background-color": "#F8F9F9", "color": "black" });
 	});
 
 	$("#instructionsCon").on("click", ".deleteIns", function() {
@@ -92,33 +92,41 @@ $(document).ready(function() {
 
 	$("#editInfo").on('click', function() {
 		$("#userInfo").css("display", "none");
+		$("#title").css("display", "none");
 		$("#editUser").css("display", "block");
 	});
 
 	$("#shareUserButton").on('click', function() {
 		console.log("clicked")
-		$("#shareUserDiv").css("display", "block");
+		$("#shareUserDiv").toggle();
 	});
 
 	$("#pictureUrl").on('change', function() {
 		var newUrl = $(this).val();
-		if(newUrl == ""){
+		if (newUrl == "") {
 			$("#recipeImg").attr("src", "../images/placeholder-image.png");
-		}else{
+		} else {
 			$("#recipeImg").attr("src", newUrl);
 		}
-		
-	});
-	
-	$("#pictureUrlUser").on('change', function() {
-		var newUrl = $(this).val();
-		if(newUrl == ""){
-			$("#userProfileImage").attr("src", "../images/profile.png");
-		}else{
-			$("#userProfileImage").attr("src", newUrl);
-		}
-		
+
 	});
 
+	$("#pictureUrlUser").on('change', function() {
+		var newUrl = $(this).val();
+		if (newUrl == "") {
+			$("#userProfileImage").attr("src", "../images/profile.png");
+		} else {
+			$("#userProfileImage").attr("src", newUrl);
+		}
+	});
+
+	$("#pictureUrlUserEdit").on('change', function() {
+		var newUrl = $(this).val();
+		if (newUrl == "") {
+			$("#userProfileImageEdit").attr("src", "../images/profile.png");
+		} else {
+			$("#userProfileImageEdit").attr("src", newUrl);
+		}
+	});
 
 });
