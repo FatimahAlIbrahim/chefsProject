@@ -16,10 +16,19 @@ public class Recipe {
 	private int id;
 	
 	private String name;
+	
+	@Column(columnDefinition = "text")
 	private String picture;
+	
+	@Column(columnDefinition = "text")
 	private String description;
+	
+	@Column(columnDefinition = "text")
 	private String ingredients;
+	
 	private String allergyWarnings;
+	
+	@Column(columnDefinition = "text")
 	private String instructions;
 	private String cuisine;
 	private String type;

@@ -11,21 +11,21 @@
 	<div class="carousel-inner">
 		<div class="carousel-item active" data-bs-interval="10000">
 			<img src="images/homePage1.jpeg" class="d-block w-100 img-fluid carousel-image">
-			<div class="carousel-caption d-none d-md-block">
+			<div class="carousel-caption d-block colorTwo">
 				<h5>First slide label</h5>
 				<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 			</div>
 		</div>
 		<div class="carousel-item" data-bs-interval="2000">
 			<img src="images/homePage2.jpeg" class="d-block w-100 img-fluid carousel-image">
-			<div class="carousel-caption d-none d-md-block">
+			<div class="carousel-caption d-block colorTwo">
 				<h5>Second slide label</h5>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 			</div>
 		</div>
 		<div class="carousel-item">
 			<img src="images/homePage3.jpeg" class="d-block w-100 img-fluid carousel-image">
-			<div class="carousel-caption d-none d-md-block ">
+			<div class="carousel-caption d-block colorTwo">
 				<h5>Third slide label</h5>
 				<p>Praesent commodo cursus magna, vel scelerisque nisl
 					consectetur.</p>
@@ -33,7 +33,7 @@
 		</div>
 		<div class="carousel-item">
 			<img src="images/homePage4.jpeg" class="d-block w-100 img-fluid carousel-image">
-			<div class="carousel-caption d-none d-md-block">
+			<div class="carousel-caption d-block colorTwo">
 				<h5>Forth slide label</h5>
 				<p>Praesent commodo cursus magna, vel scelerisque nisl
 					consectetur.</p>
