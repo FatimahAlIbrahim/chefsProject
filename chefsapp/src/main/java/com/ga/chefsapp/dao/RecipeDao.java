@@ -31,5 +31,9 @@ public interface RecipeDao extends CrudRepository<Recipe, Integer> {
 
 	//public Recipe  findByTypeParams(String type);
 	public Recipe findById(int id);
+	
+	public int countByUser(User user);
+	
+	public Iterable<Recipe> findAllByUser(User user);
 
 }

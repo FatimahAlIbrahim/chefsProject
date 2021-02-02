@@ -49,16 +49,12 @@ public class RecipeController {
 	public ModelAndView addRecipe() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/add");
-
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
-
 		User user = userDao.findByEmailAddress(email);
 		mv.addObject("userId", user.getUserId());
-
 		return mv;
 	}
 
@@ -66,67 +62,86 @@ public class RecipeController {
 	@PostMapping("/recipe/add")
 	public String addRecipe(Recipe recipe) {
 		dao.save(recipe);
-		return "redirect:/recipe/index";
+
+		HttpSession session = request.getSession();
+		session.setAttribute("addRecipeMessage", "your recipe has been added succssfuly");
+
+		return "redirect:/recipe/index?first=All";
+
 	}
 
-//	// HTTP GET REQUEST - Recipe Index
-//	@GetMapping("/recipe/index")
-//	public ModelAndView getRecipe() {
-//		var it = dao.findByOrderedRating();
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("recipe/index");
-//		mv.addObject("recipes", it);
-//
-////	// HTTP GET REQUEST - Recipe Index
-////	@GetMapping("/recipe/index")
-////	public ModelAndView getRecipe()
-////	{   ModelAndView mv = new ModelAndView();
-////		var it = dao.findByOrderedRating();
-////		
-////		mv.setViewName("recipe/index");
-////		mv.addObject("recipes", it);
-////	
-////		HomeController hc = new HomeController();
-////		hc.setAppName(mv, env);
-////		
-//		return mv;
-//	}
-////
-////		return mv;
-////	
-//
-//
-////}
+
 	// HTTP GET REQUEST - Recipe Detail
 	@GetMapping("/recipe/detail")
 	public ModelAndView recipeDetails(@RequestParam int id) {
-//		System.out.println(id);
-		System.out.println(id);
-
-//		Recipe recipe = dao.findById(id);
 		Recipe recipe = dao.findById(id);
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		User user = userDao.findByEmailAddress(email);
+		boolean flag = true;
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("recipe/detail");
-//		mv.addObject("recipe", recipe);
-		mv.addObject("recipe", recipe);
+		if (user != null) {
+			Rate rate = rateDao.findByUserAndRecipe(user, recipe);
+			if (rate == null) {
+				flag = false;
+			} else {
+				flag = true;
+			}
+			mv.addObject("currentUser", user.getUserId());
+		}
 
-//		HomeController hc = new HomeController();
-//		hc.setAppName(mv, env);
+
+		mv.setViewName("recipe/detail");
+
+		mv.addObject("recipe", recipe);
+		mv.addObject("flag", flag);
+
+
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
+		return mv;
 
+
+	}
+
+	// adding rate to recipe
+	@PostMapping("/recipe/detail")
+	public String addRating(Rate rate) {
+		rateDao.save(rate);
+		HttpSession session = request.getSession();
+		session.setAttribute("addRatingMessage", "your rating has been added succssfuly");
+		return "redirect:/recipe/detail?id=" + rate.getRecipe().getId();
+
+	}
+
+
+	// HTTP GET REQUEST - Recipe Edit
+	@GetMapping("/recipe/edit")
+	public ModelAndView editRecipe(@RequestParam int id) {
+			Recipe recipe = dao.findById(id);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("recipe/edit");
+			mv.addObject("recipe",recipe);
+			HomeController hc = new HomeController();
+			hc.setAppName(mv, env);
 		return mv;
 	}
-// public String deleteRecipe(@RequestParam int id) {
-//		}
+
+	// HTTP GET REQUEST - Recipe Delete
+	@GetMapping("/recipe/delete")
+	public String deleteRecipe(@RequestParam int id) {
+		dao.deleteById(id);
+		return "redirect:/recipe/index";
+	}
 
 	// HTTP Get REQUEST - Select Recipe
-	@GetMapping("recipe/index")
-		public ModelAndView recipeSelectrecipe(@RequestParam String first) {
-		System.out.println(first);
-		var recipes= dao.findByOrderedRating();	
+	@GetMapping("/recipe/index")
+	public ModelAndView getRecipe(@RequestParam String first) {
+
+	
+		var recipes = dao.findByOrderedRating();
 		if (first.equals("All")) {
+
 
  recipes = dao.findByOrderedRating();
 		}
@@ -140,9 +155,7 @@ for (Recipe recipe : recipes) {
 			
 }
 var rateIt =Arrays.asList(ratelist);
-System.out.println(rateIt);
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("recipe/selectrecipe");
 			mv.setViewName("recipe/index");
 		mv.addObject("recipes", recipes);
 		mv.addObject("rates",rateIt);
@@ -153,3 +166,48 @@ System.out.println(rateIt);
 
 		}
 }
+
+	@GetMapping("/recipe/detail/qrcode")
+	public void qrcode(@RequestParam int id, HttpServletResponse response) throws Exception {
+		String appName = env.getProperty("app.name");
+
+		response.setContentType("image/png");
+		OutputStream outputStream = response.getOutputStream();
+		outputStream.write(ZXingHelper.getQRCode(appName + "recipe/detail?id=" + id, 200, 200));
+		outputStream.flush();
+		outputStream.close();
+	}
+
+	@GetMapping("/recipe/detail/qrcode/download")
+	public String downloadQRCode(@RequestParam int id, HttpServletResponse response) {
+		String appName = env.getProperty("app.name");
+		Recipe recipe = dao.findById(id);
+		String fileName = recipe.getName() + "Recipe ";
+
+		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
+		String pathToDownloads = downdloadDirDir.getPath();
+
+		try {
+			URL url = new URL("http://localhost:8082" + appName + "recipe/detail/qrcode?id=" + id);
+			HttpURLConnection http = (HttpURLConnection) url.openConnection();
+			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
+			FileOutputStream fileOut = new FileOutputStream(
+					new File(pathToDownloads + System.getProperty("file.separator") + fileName + ".png"));
+			BufferedOutputStream out = new BufferedOutputStream(fileOut, 1024);
+			byte[] buffer = new byte[1024];
+			int read = 0;
+			while ((read = in.read(buffer, 0, 1024)) >= 0) {
+				out.write(buffer, 0, read);
+			}
+			out.close();
+			in.close();
+			return "redirect:/recipe/detail?id=" + recipe.getId();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "redirect:/recipe/detail?id=" + recipe.getId();
+		}
+	}
+
+}
+		
+

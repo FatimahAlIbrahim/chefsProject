@@ -1,42 +1,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <jsp:include page="../shared/layout.jsp" />
-<table class="table table-striped">
+
+<table class="table table-striped" id="chefsTable">
+ <thead>
 	<tr>
-		<th>Chef Name</th>
-		<th>Email Address</th>		
-		<th>Actions</th>
-		
+		<th scope="col">Chef Name</th>
+		<th scope="col">Email Address</th>
+		<security:authorize access="isAuthenticated()">
+			<th scope="col">Actions</th>
+		</security:authorize>
+
 	</tr>
-	<c:forEach items="${chefs}" var="user">
+	</thead>
+	<c:forEach items="${chefs}" var="chef">
 		<tr>
-<%-- 				<fmt:parseNumber var = "parseduserId" type = "number" value = "${user.userId}"/>
- --%>		
-		
-<%-- 		<td><a href="${appName}user/detail?id=${user.userId}">${user.firstName}</a></td>
- --%>		
-<%--  <fmt:parseNumber var = "parseduserId" type = "number" value = "${user.userId}"/>
- --%>				
- <td>  <a href="${appName}user/detail?email=${user.emailAddress}">${user.firstName}</a> 
-				
-				<%--  <c:out value="${user.user_id}" /> --%>
-				</td>
-		
-	
-<%--  			<td><a href="${appName}user/detail?id=parseduserId">${user.firstName}</a></td>
- --%> 
-<%-- 			<td>${user.emailAddress}</td>
- --%>			
- 			<td>${user.emailAddress}</td>
- 
-<%-- 			<td><a href="${appName}user/edit?id=${user.userId}">Edit</a>
- --%>		
-			
-		<!-- if it is Admin , show delete link ---->
-<%-- 			 | <a href="${appName}user/delete?id=${user.userId}">Delete</a></td>
- --%>			 
-		
+			<td><a href="${appName}user/detail?email=${chef[1]}">${chef[0]}</a></td>
+			<td>${chef[1]}</td>
 		</tr>
 	</c:forEach>
 </table>
