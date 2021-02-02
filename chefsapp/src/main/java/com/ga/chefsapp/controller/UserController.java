@@ -73,6 +73,8 @@ public class UserController {
 				return mv;
 			}
 		}
+		mv.addObject("signupSuccessMessage", "Your registeration has been successfully completed! Please login");
+
 		mv.setViewName("user/login");
 		
 		// password Encryption
@@ -81,7 +83,6 @@ public class UserController {
 		user.setPassword(newPassword);
 
 		userDao.save(user);
-		mv.addObject("signupSuccessMessage", "Your registeration has been successfully completed! Please login");
 		return mv;
 	}
 
@@ -90,6 +91,8 @@ public class UserController {
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/login");
+//		mv.addObject("loginSuccessMessage", "Logged in successfully!");
+
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 		return mv;
@@ -106,7 +109,7 @@ public class UserController {
 		
 		User user = userDao.findByEmailAddress(email);
 		
-		if(user.getPicture().equals(null)) {
+		if(user.getPicture()== null) {
 			user.setPicture("../images/profile.png");
 		}
 		
@@ -138,10 +141,9 @@ public class UserController {
 
 		ModelAndView mv = new ModelAndView();
 
-		var it = userDao.findByFKuserId();
-		
+		List<Object[]> chefs = userDao.findByFKuserId();
 		mv.setViewName("chefs/index");
-		mv.addObject("chefs", it);
+		mv.addObject("chefs", chefs);
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 
