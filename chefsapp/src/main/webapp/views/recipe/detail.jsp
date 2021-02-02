@@ -3,10 +3,6 @@
 	uri="http://www.springframework.org/security/tags"%>
 <jsp:include page="../shared/layout.jsp" />
 
-<%-- <div class="form-group">
-
-		<label>Recipe name </label> <input type="text" name="title" value="${recipe.name}" class="form-control">
-	</div> --%>
 <!-- --------------------------------------- -->
 <input type="hidden" name="id" value="${recipe.id}">
 
@@ -26,6 +22,7 @@
 		</div>
 
 		<div class="w-100"></div>
+
 
 
 		<div class="col">
@@ -56,42 +53,40 @@
 		<div class="col" id="recipeDescription">${recipe.description}</div>
 		<div class="w-100"></div>
 
+
 		<div class="col" id="ingredients">
 			<h2>Ingredients</h2>${recipe.ingredients}</div>
 		<div class="col" id="instructions">
 			<h2>Instructions</h2>${recipe.instructions}</div>
 
-	</div>
-	<div class="w-25 h-100" style="margin: 0 auto;">
-	<button id="shareRecipeButton" type="button"
-		class="btn btn-outline-dark w-100">Share Recipe</button>
-	<div id="shareUserDiv" style="display: none;">
-	<div class="card text-center">
-		<img src="${appName}recipe/detail/qrcode?id=${recipe.getId()}"
-			width="100" height="100" class="card-img-top"> 
-			<div class="card-body">
+		<div class="w-100"></div>
+
+		<div class="w-25 h-100" style="margin: 0 auto;">
+			<button id="shareRecipeButton" type="button"
+				class="btn btn-outline-dark w-100">Share Recipe</button>
+			<div id="shareUserDiv" style="display: none;">
+				<div class="card text-center">
+					<img src="${appName}recipe/detail/qrcode?id=${recipe.getId()}"
+						width="100" height="100" class="card-img-top">
+					<div class="card-body">
 						<h5 class="card-title">QRCode</h5>
 					</div>
 					<div class="card-footer">
-						<small class="text-muted">
-			<a
-			href="${appName}recipe/detail/qrcode/download?id=${recipe.getId()}">
-			<button class="btn btn-outline-dark" type="button">Download
-									QRCode</button></a>
-			
-			
-			</small>
+						<small class="text-muted"> <a
+							href="${appName}recipe/detail/qrcode/download?id=${recipe.getId()}">
+								<button class="btn btn-outline-dark" type="button">Download
+									QRCode</button>
+						</a>
+
+
+						</small>
 					</div>
+				</div>
 			</div>
-	</div>
-	</div>
-
-</div>
-
-<!-- --------------------------------------- -->
-
-<!--user rating -->
-<security:authorize access="isAuthenticated()">
+		</div>
+				<div class="w-100"></div>
+		<div class="col">
+		<security:authorize access="isAuthenticated()">
 
 	<c:if test="${!flag}">
 
@@ -118,6 +113,32 @@
 		</form>
 	</c:if>
 </security:authorize>
+	</div>	
+
+	</div>
+</div>
+
+<!-- --------------------------------------- -->
+
+<!--user rating -->
+
+
+<!-- <div class="main">
+	<label>Rate the recipe:</label> <i class="fa fa-star checked" id="1"></i>
+	<i class="fa fa-star unchecked" id="2"></i> <i
+		class="fa fa-star unchecked" id="3"></i> <i
+		class="fa fa-star unchecked" id="4"></i> <i
+		class="fa fa-star unchecked" id="5"></i>
+</div>
+
+<div>
+	<button class="btn" id="buttonnew">Submit rating</button>
+</div> -->
+
+
+
+<!--user rating -->
+
 
 <script src="../js/rate.js" type="text/javascript"></script>
 <script src="js/rate.js" type="text/javascript"></script>

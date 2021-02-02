@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
 	if ($(location).attr("href").endsWith("/")) {
-		$(logo).attr("src", "images/chef.png");
+		$(logo).attr("src", "images/chefs.svg");
 	}
 	else {
-		$(logo).attr("src", "../images/chef.png");
+		$(logo).attr("src", "../images/chefs.svg");
 	}
 
 	$("#addIng").on("click", function() {
