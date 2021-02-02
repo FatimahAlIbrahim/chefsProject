@@ -122,6 +122,7 @@ public class RecipeController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/edit");
 			mv.addObject("recipe",recipe);
+
 			HomeController hc = new HomeController();
 			hc.setAppName(mv, env);
 		return mv;
@@ -165,7 +166,7 @@ var rateIt =Arrays.asList(ratelist);
 			return mv;
 
 		}
-}
+
 
 	@GetMapping("/recipe/detail/qrcode")
 	public void qrcode(@RequestParam int id, HttpServletResponse response) throws Exception {

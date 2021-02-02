@@ -21,10 +21,10 @@
 integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #7d0633;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${appName}"> <img id="logo"
-				src="images/chef.png" width="30" height="24"
+			<a class="navbar-brand" href="${appName}"> <img style="color: white;" id="logo"
+				src="images/chefs.svg" width="30" height="24"
 				class="d-inline-block align-top"> Chefs
 			</a>
 			<button class="navbar-toggler" type="button"
@@ -36,11 +36,11 @@ integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQV
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<security:authorize access="isAuthenticated()">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link"
+						<li style="color: white;" class="nav-item"><a class="nav-link"
 							href="${appName}chefs/index">Chefs</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li style="color: white;" class="nav-item"><a class="nav-link"
 							href="${appName}recipe/index?first=All">Recipes</a></li>
-						<li class="nav-item"><a class="nav-link"
+						<li style="color: white;" class="nav-item"><a class="nav-link"
 							href="${appName}recipe/add">Add Recipe</a></li>
 					</ul>
 					<ul class="navbar-nav ml-auto">
