@@ -33,6 +33,6 @@
 	<input name="role" type="hidden" value="ROLE_USER">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
-	<button type="submit" class="btn btn-primary mb-3">Submit</button>
+	<button id="signUpBtn" type="submit" class="btn btn-primary mb-3">Submit</button>
 
 </form>

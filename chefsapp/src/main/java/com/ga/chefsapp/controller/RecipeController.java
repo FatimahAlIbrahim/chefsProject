@@ -65,8 +65,23 @@ public class RecipeController {
 		dao.save(recipe);
 		HttpSession session = request.getSession();
 		session.setAttribute("addRecipeMessage", "your recipe has been added succssfuly");
+
 		return "redirect:/recipe/index?first=All";
 	}
+
+//	// HTTP GET REQUEST - Recipe Index
+//	@GetMapping("/recipe/index")
+//	public ModelAndView getRecipe() {
+//		var it = dao.findByOrderedRating();
+//		ModelAndView mv = new ModelAndView();
+//		mv.setViewName("recipe/index");
+//		mv.addObject("recipes", it);
+//
+//		HomeController hc = new HomeController();
+//		hc.setAppName(mv, env);
+//
+//		return mv;
+//	}
 
 //	// HTTP GET REQUEST - Recipe Index
 //	@GetMapping("/recipe/index")
@@ -99,9 +114,13 @@ public class RecipeController {
 			}
 			mv.addObject("currentUser", user.getUserId());
 		}
+
+
 		mv.setViewName("recipe/detail");
+
 		mv.addObject("recipe", recipe);
 		mv.addObject("flag", flag);
+
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 		return mv;
@@ -145,6 +164,7 @@ public class RecipeController {
 		} else {
 			recipes = dao.findByTypeParams(first);
 		}
+
 		ModelAndView mv = new ModelAndView();
 //		mv.setViewName("recipe/selectrecipe");
 		mv.setViewName("recipe/index");
@@ -196,3 +216,4 @@ public class RecipeController {
 	}
 
 }
+		
