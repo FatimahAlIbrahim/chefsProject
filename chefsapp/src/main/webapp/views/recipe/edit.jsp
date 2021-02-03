@@ -5,8 +5,13 @@
 		src="${recipe.getPicture()}">
 	<div class="mb-3">
 		<label class="form-label colorTwo">Picture URL</label> <input
-			id="pictureUrlEdit" type="text" name="picture" class="form-control"
+			id="pictureUrlEdit" type="url" name="picture" class="form-control"
 			value="${recipe.getPicture()}">
+	</div>
+	
+	<div class="mb-3">
+		<label class="form-label colorTwo">Video URL</label> <input
+			 type="url" name="video" class="form-control" value="${recipe.getVideo()}">
 	</div>
 	<div class="mb-3">
 		<label class="form-label colorTwo">Name </label> <input type="text"
@@ -86,7 +91,7 @@
 		<hr>
 		<div id="instructionsConEdit"></div>
 		<div class="input-group mb-3">
-			<input id="instructionsTextEdit" type="text" class="form-control">
+			<input id="instructionsTextEdit" type="text" class="form-control"  maxlength="400">
 			<button class="btn btn-style" type="button" id="addInsEdit">add
 				Instructions</button>
 		</div>

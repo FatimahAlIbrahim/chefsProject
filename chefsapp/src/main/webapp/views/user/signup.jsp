@@ -8,7 +8,7 @@
 		src="../images/profile.png">
 	<div class="mb-3">
 		<label class="form-label colorTwo">Picture URL</label> <input
-			id="pictureUrlUser" type="text" name="picture" class="form-control"
+			id="pictureUrlUser" type="url" name="picture" class="form-control"
 			required>
 	</div>
 

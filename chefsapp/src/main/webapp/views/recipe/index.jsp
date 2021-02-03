@@ -5,8 +5,8 @@
 
 <jsp:include page="../shared/layout.jsp" />
 <div class="container-fluid" style="height: 100vh;">
-	<h1></h1>
-	<div class="row">
+	
+	<div class="row" style="height: inherit;">
 		<div class="col-sm-2 filterNav">
 			<p>Select the type of meal</p>
 			<form action="${appName}recipe/index" method="get" id="recipeFilter">
@@ -76,11 +76,11 @@
 									${recipe.getUser().getLastName()}</small>
 							</div>
 							<div class="card-footer">
-								<c:forEach var="i" begin="1" end="${rates[0][status.index]}"
+								<c:forEach var="i" begin="1" end="${rates.get(status.index)}"
 									step="1">
 									<i class="fa fa-star checked" id=i></i>
 								</c:forEach>
-								<c:forEach var="i" begin="1" end="${5-rates[0][status.index]}"
+								<c:forEach var="i" begin="1" end="${5-rates.get(status.index)}"
 									step="1">
 									<i class="fa fa-star unchecked" id=i></i>
 								</c:forEach>

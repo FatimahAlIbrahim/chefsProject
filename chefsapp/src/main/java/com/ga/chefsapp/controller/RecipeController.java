@@ -120,12 +120,19 @@ public class RecipeController {
 	// HTTP GET REQUEST - Recipe Edit
 	@GetMapping("/recipe/edit")
 	public ModelAndView editRecipe(@RequestParam int id) {
-
-		Recipe recipe = dao.findById(id);
 		ModelAndView mv = new ModelAndView();
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		User user = userDao.findByEmailAddress(email);
+		mv.addObject("userId", user.getUserId());
+
+		
+		Recipe recipe = dao.findById(id);
 
 		mv.setViewName("recipe/edit");
 		mv.addObject("recipe", recipe);
+
 
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
@@ -163,12 +170,12 @@ public class RecipeController {
 				ratelist.add(0);
 			}
 		}
-		var rateIt = Arrays.asList(ratelist);
-
+	
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/index");
 		mv.addObject("recipes", recipes);
-		mv.addObject("rates", rateIt);
+		mv.addObject("rates", ratelist);
+
 		mv.addObject("user", user);
 
 		HomeController hc = new HomeController();
@@ -196,13 +203,11 @@ public class RecipeController {
 		Recipe recipe = dao.findById(id);
 
 		String fileName = recipe.getName() + "Recipe ";
-		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 		HttpSession session = request.getSession();
-
 		try {
-			URL url = new URL(baseUrl + "/recipe/detail/qrcode?id=" + id);
+			URL url = new URL("http://chefswebapp-env.eba-56tcnj8j.us-east-2.elasticbeanstalk.com/recipe/detail/qrcode?id=" + id);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(
