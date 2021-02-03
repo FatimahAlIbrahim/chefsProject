@@ -67,7 +67,7 @@
 	<div class="mb-3">
 		<label class="form-label">Allergy Warnings</label> 
 		<select class="form-control" name="allergyWarnings" multiple="multiple" required>
-			<option value="--">--</option>
+			<option value="None">None</option>
 			<option value="Milk">Milk</option>
 			<option value="Eggs">Eggs</option>
 			<option value="Soy">Soy</option>

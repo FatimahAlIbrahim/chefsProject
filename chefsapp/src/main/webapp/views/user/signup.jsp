@@ -1,8 +1,8 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
 
-<p class="h3">Sign Up</p>
+<p class="h3 color2">Sign Up</p>
 
-<form action="${appName}user/signup" method="post">
+<form action="${appName}user/signup" method="post" class="color2">
 
 	<img class="img-fluid img-thumbnail" id="userProfileImage" src="../images/profile.png">
 	<div class="mb-3">

@@ -75,10 +75,13 @@ public class RecipeController {
 	// HTTP GET REQUEST - Recipe Detail
 	@GetMapping("/recipe/detail")
 	public ModelAndView recipeDetails(@RequestParam int id) {
+		
 		Recipe recipe = dao.findById(id);
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
 		User user = userDao.findByEmailAddress(email);
+		
 		boolean flag = true;
 		ModelAndView mv = new ModelAndView();
 		if (user != null) {
@@ -94,6 +97,8 @@ public class RecipeController {
 		mv.setViewName("recipe/detail");
 
 		mv.addObject("recipe", recipe);
+		mv.addObject("rates", recipe.getRates());
+
 		mv.addObject("flag", flag);
 
 		HomeController hc = new HomeController();

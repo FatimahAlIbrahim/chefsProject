@@ -1,8 +1,8 @@
 <jsp:include page="../shared/layout.jsp"></jsp:include>
 
-<p class="h3">Login</p>
+<p class="h3 color2">Login</p>
 
-<form action="${appName}login" method="post">
+<form action="${appName}login" method="post" class="color2">
 
 	<div class="mb-3">
 		<label class="form-label">Email Address</label>
