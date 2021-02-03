@@ -27,7 +27,7 @@
 <body>
 
 
-	<nav class="navbar navbar-expand-lg navbar-light "
+	<nav class="navbar navbar-expand-lg navbar-light"
 		style="background-color: #7d0633;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${appName}"> <img id="logo"
@@ -38,7 +38,7 @@
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
 				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
+				<span class="navbar-toggler-icon custom-toggler"></i></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<security:authorize access="isAuthenticated()">

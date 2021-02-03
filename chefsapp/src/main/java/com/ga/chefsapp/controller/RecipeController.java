@@ -66,7 +66,7 @@ public class RecipeController {
 		dao.save(recipe);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("addRecipeMessage", "your recipe has been added succssfuly");
+		session.setAttribute("addRecipeMessage", "your recipe has been added or edited succssfuly");
 
 		return "redirect:/recipe/index?first=All";
 
