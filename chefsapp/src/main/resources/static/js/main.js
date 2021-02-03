@@ -21,11 +21,11 @@ $(document).ready(function() {
 		var measurement = $("#measurement").children("option:selected").val();
 		var item = $("#item").val();
 
-		if (amount != "" && item != "") {
+		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
-				var ingredient = amount + " " + measurement + " of " + item;
+				var ingredient = amount + " " + measurement + " of " + item.trim();
 			else
-				var ingredient = amount + " " + item;
+				var ingredient = amount + " " + item.trim();
 			$("#ingContainer").append("<div class='ingItem'><p class='ingText' style='display: inline;'>" + ingredient + "</p><span class='deleteIng' style='display:  none; text-align: right; float: right;'><b>Delete</b></span></div>");
 		}
 		else {
@@ -63,14 +63,14 @@ $(document).ready(function() {
 		$(this).children(".deleteIns").css("display", "inline");
 		$(this).children(".moveUp").css("display", "inline");
 		$(this).children(".moveDown").css("display", "inline");
-		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh" });
+		$(this).css({ "background-color": "#7d0633", "color": "white" });
 	});
 
 	$("#instructionsCon").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
 		$(this).children(".moveUp").css("display", "none");
 		$(this).children(".moveDown").css("display", "none");
-		$(this).css({ "background-color": "white", "color": "#31112c", "height": "" });
+		$(this).css({ "background-color": "white", "color": "#31112c" });
 	});
 
 	$("#instructionsCon").on("click", ".deleteIns", function() {
@@ -201,11 +201,11 @@ $(document).ready(function() {
 		var measurement = $("#measurementEdit").children("option:selected").val();
 		var item = $("#itemEdit").val();
 
-		if (amount != "" && item != "") {
+		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
-				var ingredient = amount + " " + measurement + " of " + item;
+				var ingredient = amount + " " + measurement + " of " + item.trim();
 			else
-				var ingredient = amount + " " + item;
+				var ingredient = amount + " " + item.trim();
 			$("#ingContainerEdit").append("<div class='ingItem'><p class='ingText' style='display: inline;'>" + ingredient + "</p><span class='deleteIng' style='display:  none; text-align: right; float: right;'><b>Delete</b></span></div>");
 		}
 		else {
@@ -243,14 +243,14 @@ $(document).ready(function() {
 		$(this).children(".deleteIns").css("display", "inline");
 		$(this).children(".moveUp").css("display", "inline");
 		$(this).children(".moveDown").css("display", "inline");
-		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh"});
+		$(this).css({ "background-color": "#7d0633", "color": "white"});
 	});
 
 	$("#instructionsConEdit").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
 		$(this).children(".moveUp").css("display", "none");
 		$(this).children(".moveDown").css("display", "none");
-		$(this).css({ "background-color": "white", "color": "#31112c", "height": "" });
+		$(this).css({ "background-color": "white", "color": "#31112c"});
 	});
 
 	$("#instructionsConEdit").on("click", ".deleteIns", function() {
@@ -301,7 +301,9 @@ $(document).ready(function() {
 	}
 
 	$("#editRecipe").submit(inputValidationEdit);
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// FOR RECIPE INDEX
 	$("#recipeFilter").ready(function() {
 		var indexOfType = $(location).attr("href").indexOf("first");
 		var indexOfAnd = $(location).attr("href").indexOf("&");
@@ -311,7 +313,6 @@ $(document).ready(function() {
 		}else{
 			type = $(location).attr("href").substring(indexOfType+6, indexOfAnd);
 		}
-		console.log('type='+type);
 		if (type == "All") {
 			$("#All").attr("checked", "checked");
 		}
@@ -324,7 +325,7 @@ $(document).ready(function() {
 		else if (type == "Salad") {
 			$("#Salad").attr("checked", "checked");
 		}
-		else if (type == "Main Course") {
+		else if (type == "Main+Course") {
 			$("#MainCourse").attr("checked", "checked");
 		}
 		else if (type == "Dessert") {

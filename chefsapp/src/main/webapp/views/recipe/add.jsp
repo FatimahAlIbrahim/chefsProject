@@ -11,7 +11,12 @@
 		src="../images/placeholder-image.png">
 	<div class="mb-3">
 		<label class="form-label colorTwo">Picture URL</label> <input
-			id="pictureUrl" type="text" name="picture" class="form-control">
+			id="pictureUrl" type="url" name="picture" class="form-control">
+	</div>
+	
+	<div class="mb-3">
+		<label class="form-label colorTwo">Video URL</label> <input
+			 type="url" name="video" class="form-control">
 	</div>
 
 	<div class="mb-3">
@@ -96,7 +101,7 @@
 		<hr>
 		<div id="instructionsCon"></div>
 		<div class="input-group mb-3">
-			<input id="instructionsText" type="text" class="form-control">
+			<input id="instructionsText" type="text" class="form-control" maxlength="400">
 			<button class="btn btn-style" type="button" id="addIns">add
 				Instructions</button>
 		</div>

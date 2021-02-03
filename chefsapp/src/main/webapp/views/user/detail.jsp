@@ -145,7 +145,7 @@
 					src="${user.getPicture()}">
 				<div class="mb-3">
 					<label class="form-label colorTwo">Picture URL</label> <input
-						id="pictureUrlUserEdit" type="text" name="picture"
+						id="pictureUrlUserEdit" type="url" name="picture"
 						class="form-control" value="${user.getPicture()}" required>
 				</div>
 

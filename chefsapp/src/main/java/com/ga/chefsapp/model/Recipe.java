@@ -19,6 +19,9 @@ public class Recipe {
 
 	@Column(columnDefinition = "text")
 	private String picture;
+	
+	@Column(columnDefinition = "text")
+	private String video;
 
 	@Column(columnDefinition = "text")
 	private String description;
@@ -50,6 +53,14 @@ public class Recipe {
 	@Column(name = "updatedAt", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
 
 	public int getId() {
 		return id;

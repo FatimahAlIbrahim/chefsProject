@@ -18,7 +18,8 @@
 			<img alt="recipeImg" src="${ recipe.picture}" width="100%"
 				height="600px">
 			<div
-				style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">
+				style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); width: inherit;
+				">
 				<h1 id="recipeDetailName">${ recipe.name}</h1>
 			</div>
 		</div>
@@ -108,10 +109,20 @@
 			</ol>
 		</div>
 		<div class="w-100"></div>
+		<div class="col" id="recipeDetailImg">
+			<video controls style="width: inherit;">
+				<source src="${ recipe.video}" type="video/mp4">
+				<source src="${ recipe.video}" type="video/ogg">
+				Your browser does not support HTML video.
+			</video>
+
+		</div>
+		<div class="w-100"></div>
+
 
 		<div class="w-25 h-100" style="margin: 0 auto;">
 			<button id="shareRecipeButton" type="button"
-				class="btn btn-outline-dark w-100">Share Recipe</button>
+				class="btn btn-style w-100">Share Recipe</button>
 			<div id="shareUserDiv" style="display: none;">
 				<div class="card text-center">
 					<img src="${appName}recipe/detail/qrcode?id=${recipe.getId()}"
@@ -132,7 +143,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="w-100"></div>
+		<div class="w-100" style="height: 200px"></div>
 		<security:authorize access="isAuthenticated()">
 
 			<c:if test="${!flag}">
