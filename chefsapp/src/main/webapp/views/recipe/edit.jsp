@@ -29,7 +29,9 @@
 	<div class="container-fluid" style="margin-left: -1.5%; margin-bottom: 1%;">
 		<div class="row">
 			<div class="col">
+
 				<label class="form-label colorTwo">Amount</label>
+
 			</div>
 			<div class="col">
 				<label class="form-label colorTwo">Measurement</label>
@@ -87,6 +89,7 @@
 		<hr>
 		<div id="instructionsConEdit"></div>
 		<div class="input-group mb-3">
+
 			<input id="instructionsTextEdit" type="text" class="form-control">
 			<button class="btn btn-style" type="button" id="addInsEdit">add Instructions</button>
 		</div>
