@@ -5,40 +5,49 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
-@Table(name="Recipe")
+@Table(name = "Recipe")
 public class Recipe {
 	@Id
-	@GeneratedValue 
+	@GeneratedValue
 	private int id;
-	
+
 	private String name;
+
+	@Column(columnDefinition = "text")
 	private String picture;
+
+	@Column(columnDefinition = "text")
 	private String description;
+
+	@Column(columnDefinition = "text")
 	private String ingredients;
+
 	private String allergyWarnings;
+
+	@Column(columnDefinition = "text")
 	private String instructions;
 	private String cuisine;
 	private String type;
 	private String duration;
 	private int servings;
 	private int calories;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "FK_userId")
 	private User user;
-	
-	@OneToMany(mappedBy="recipe")
+
+	@OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
 	private Set<Rate> rates;
-	
-	@Column(name="createdAt", nullable = false, updatable = false)
+
+	@Column(name = "createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createAt;
-	
-	@Column(name="updatedAt", nullable = false, updatable = true)
+
+	@Column(name = "updatedAt", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updateAt;
 
@@ -169,8 +178,5 @@ public class Recipe {
 	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
-
-	
-
 
 }

@@ -7,26 +7,25 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
 @Entity
 @Table(name = "Rate")
-public class Rate{
+public class Rate {
 
-	 @Id
-	 @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int rateId;
-	
+
 	private int rating;
 	private String comment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "recipe")
 	private Recipe recipe;
-	
+
 	@Column(name = "createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createAt;
@@ -36,7 +35,6 @@ public class Rate{
 	private LocalDateTime updateAt;
 
 	// Getters and Setters
-	
 	public int getRating() {
 		return rating;
 	}
@@ -93,5 +91,4 @@ public class Rate{
 		this.updateAt = updateAt;
 	}
 
-	
 }

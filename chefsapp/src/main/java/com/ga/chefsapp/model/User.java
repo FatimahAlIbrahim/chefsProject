@@ -9,46 +9,40 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="User")
+@Table(name = "User")
 public class User {
 
-	// columns
-	
 	@Id
 	@GeneratedValue
 	private int userId;
-	
+
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private String emailAddress;
-	
+
 	private String picture;
-	
+
 	private String password;
-	
+
 	private String role;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Recipe> recipes;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Rate> rates;
-	
-	
-	@Column(name="createdAt", nullable = false, updatable = false)
+
+	@Column(name = "createdAt", nullable = false, updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
-	@Column(name="updatedAt", nullable = false, updatable = true)
+
+	@Column(name = "updatedAt", nullable = false, updatable = true)
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-//	/////////////////////////////////////////////////////////////////////
-	
 	// Getters and Setters
-	
 	public int getUserId() {
 		return userId;
 	}
@@ -136,5 +130,5 @@ public class User {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 }

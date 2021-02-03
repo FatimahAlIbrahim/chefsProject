@@ -7,7 +7,6 @@
 
 <jsp:include page="../shared/layout.jsp" />
 
-<!-- --------------------------------------- -->
 <input type="hidden" name="id" value="${recipe.id}">
 
 
@@ -19,8 +18,8 @@
 			<img alt="recipeImg" src="${ recipe.picture}" width="100%"
 				height="600px">
 			<div
-				style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); color: white;">
-				<h1 id="recipeDetailName" >${ recipe.name}</h1>
+				style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">
+				<h1 id="recipeDetailName">${ recipe.name}</h1>
 			</div>
 		</div>
 
@@ -57,11 +56,11 @@
 			${recipe.calories}
 		</div>
 
-		<div class="col info " >
+		<div class="col info ">
 
 			<img
 				src="https://cdn.iconscout.com/icon/free/png-256/warning-190-457484.png"
-				alt="cuisine" width="40px" height="40px"> <span >allergy
+				alt="cuisine" width="40px" height="40px"> <span>allergy
 				warnings</span> ${recipe.allergyWarnings}
 		</div>
 
@@ -107,7 +106,7 @@
 
 				</c:forEach>
 			</ol>
-			</div>
+		</div>
 		<div class="w-100"></div>
 
 		<div class="w-25 h-100" style="margin: 0 auto;">
@@ -123,7 +122,7 @@
 					<div class="card-footer">
 						<small class="text-muted"> <a
 							href="${appName}recipe/detail/qrcode/download?id=${recipe.getId()}">
-								<button class="btn btn-outline-dark" type="button">Download
+								<button class="btn btn-style" type="button">Download
 									QRCode</button>
 						</a>
 
@@ -134,73 +133,53 @@
 			</div>
 		</div>
 		<div class="w-100"></div>
-			<security:authorize access="isAuthenticated()">
+		<security:authorize access="isAuthenticated()">
 
-				<c:if test="${!flag}">
+			<c:if test="${!flag}">
 
-					<form id="addRating" action="${appName}recipe/detail" method="post">
-						<div class="main form-group">
-							<label>Rate the recipe:</label> <i class="fa fa-star checked"
-								id="1"></i> <i class="fa fa-star unchecked" id="2"></i> <i
-								class="fa fa-star unchecked" id="3"></i> <i
-								class="fa fa-star unchecked" id="4"></i> <i
-								class="fa fa-star unchecked" id="5"></i>
-						</div>
-						<div class="form-group">
-							<label>Comment: </label> <input type="text" name="comment"
-								class="form-control">
+				<form id="addRating" action="${appName}recipe/detail" method="post">
+					<div class="main form-group">
+						<label>Rate the recipe:</label> <i class="fa fa-star checked"
+							id="1"></i> <i class="fa fa-star unchecked" id="2"></i> <i
+							class="fa fa-star unchecked" id="3"></i> <i
+							class="fa fa-star unchecked" id="4"></i> <i
+							class="fa fa-star unchecked" id="5"></i>
+					</div>
+					<div class="form-group">
+						<label>Comment: </label> <input type="text" name="comment"
+							class="form-control">
 
-						</div>
-						<input type="hidden" name="rating" value="1" id="rate"> <input
-							type="hidden" name="recipe" value="${recipe.id}"> <input
-							type="hidden" name="user" value="${currentUser}"> <input
-							type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
+					</div>
+					<input type="hidden" name="rating" value="1" id="rate"> <input
+						type="hidden" name="recipe" value="${recipe.id}"> <input
+						type="hidden" name="user" value="${currentUser}"> <input
+						type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-						<button class="btn btn-primary" id="submitRatingBtn" type="submit">Submit
-							rating</button>
-					</form>
-				</c:if>
-			</security:authorize>
-				<div class="w-100"></div>
-		
-		<div class="col" >
-		
-		<h4><img
-				src="https://image.flaticon.com/icons/png/512/1380/1380338.png"
-				alt="cuisine" width="40px" height="40px">Comments:</h4>
-		
-	<c:forEach items="${ rates}" var="recipeRates">
-		
-		<p style="border-left:thin solid #f2a07b; padding-left:5px;" >		<strong style="color:#7d0633">${ recipeRates.getUser().getFirstName()}: </strong>${recipeRates.getComment()}</p>
-		</c:forEach>
+					<button class="btn btn-style" id="submitRatingBtn" type="submit">Submit
+						rating</button>
+				</form>
+			</c:if>
+		</security:authorize>
+		<div class="w-100"></div>
+
+		<div class="col">
+
+			<h4>
+				<img src="https://image.flaticon.com/icons/png/512/1380/1380338.png"
+					alt="cuisine" width="40px" height="40px">Comments:
+			</h4>
+
+			<c:forEach items="${ rates}" var="recipeRates">
+
+				<p style="border-left: thin solid #f2a07b; padding-left: 5px;">
+					<strong class="colorOne">${ recipeRates.getUser().getFirstName()}:
+					</strong>${recipeRates.getComment()}</p>
+			</c:forEach>
 		</div>
-		
+
 
 	</div>
 </div>
-
-<!-- --------------------------------------- -->
-
-<!--user rating -->
-
-
-<!-- <div class="main">
-	<label>Rate the recipe:</label> <i class="fa fa-star checked" id="1"></i>
-	<i class="fa fa-star unchecked" id="2"></i> <i
-		class="fa fa-star unchecked" id="3"></i> <i
-		class="fa fa-star unchecked" id="4"></i> <i
-		class="fa fa-star unchecked" id="5"></i>
-</div>
-
-<div>
-	<button class="btn" id="buttonnew">Submit rating</button>
-</div> -->
-
-
-
-<!--user rating -->
-
 
 <script src="../js/rate.js" type="text/javascript"></script>
 <script src="js/rate.js" type="text/javascript"></script>
