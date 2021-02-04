@@ -66,7 +66,7 @@ public class RecipeController {
 		dao.save(recipe);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("addRecipeMessage", "your recipe has been added or edited succssfuly");
+		session.setAttribute("addRecipeMessage", "your recipe has been added/edited succssfuly");
 
 		return "redirect:/recipe/index?first=All";
 
@@ -75,12 +75,16 @@ public class RecipeController {
 	// HTTP GET REQUEST - Recipe Detail
 	@GetMapping("/recipe/detail")
 	public ModelAndView recipeDetails(@RequestParam int id) {
+
 		Recipe recipe = dao.findById(id);
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
 		User user = userDao.findByEmailAddress(email);
+
 		boolean flag = true;
 		ModelAndView mv = new ModelAndView();
+
 		if (user != null) {
 			Rate rate = rateDao.findByUserAndRecipe(user, recipe);
 			if (rate == null) {
@@ -92,33 +96,43 @@ public class RecipeController {
 		}
 
 		mv.setViewName("recipe/detail");
-
 		mv.addObject("recipe", recipe);
+		mv.addObject("rates", recipe.getRates());
 		mv.addObject("flag", flag);
 
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
-		return mv;
 
+		return mv;
 	}
 
-	// adding rate to recipe
+	// HTTP POST REQUEST - Add Rate to Recipe
 	@PostMapping("/recipe/detail")
 	public String addRating(Rate rate) {
 		rateDao.save(rate);
+
 		HttpSession session = request.getSession();
 		session.setAttribute("addRatingMessage", "your rating has been added succssfuly");
-		return "redirect:/recipe/detail?id=" + rate.getRecipe().getId();
 
+		return "redirect:/recipe/detail?id=" + rate.getRecipe().getId();
 	}
 
 	// HTTP GET REQUEST - Recipe Edit
 	@GetMapping("/recipe/edit")
 	public ModelAndView editRecipe(@RequestParam int id) {
-		Recipe recipe = dao.findById(id);
 		ModelAndView mv = new ModelAndView();
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		User user = userDao.findByEmailAddress(email);
+		mv.addObject("userId", user.getUserId());
+
+		
+		Recipe recipe = dao.findById(id);
+
 		mv.setViewName("recipe/edit");
 		mv.addObject("recipe", recipe);
+
 
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
@@ -136,56 +150,64 @@ public class RecipeController {
 	@GetMapping("/recipe/index")
 	public ModelAndView getRecipe(@RequestParam String first) {
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String email = authentication.getName();
+		User user = userDao.findByEmailAddress(email);
 		var recipes = dao.findByOrderedRating();
-		if (first.equals("All")) {
 
+		if (first.equals("All")) {
 			recipes = dao.findByOrderedRating();
 		} else {
 			recipes = dao.findByTypeParams(first);
 		}
+
 		ArrayList<Integer> ratelist = new ArrayList<>();
+
 		for (Recipe recipe : recipes) {
 			if (rateDao.findByRecipeAvg(recipe) != null) {
 				ratelist.add(rateDao.findByRecipeAvg(recipe));
 			} else {
 				ratelist.add(0);
 			}
-
 		}
-		var rateIt = Arrays.asList(ratelist);
+	
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("recipe/index");
 		mv.addObject("recipes", recipes);
-		mv.addObject("rates", rateIt);
+		mv.addObject("rates", ratelist);
+
+		mv.addObject("user", user);
+
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
 
 		return mv;
-
 	}
 
+	// HTTP Get REQUEST - Get QR Code
 	@GetMapping("/recipe/detail/qrcode")
 	public void qrcode(@RequestParam int id, HttpServletResponse response) throws Exception {
 		String appName = env.getProperty("app.name");
 
 		response.setContentType("image/png");
 		OutputStream outputStream = response.getOutputStream();
+
 		outputStream.write(ZXingHelper.getQRCode(appName + "recipe/detail?id=" + id, 200, 200));
 		outputStream.flush();
 		outputStream.close();
 	}
 
+	// HTTP Get REQUEST - Download QR Code
 	@GetMapping("/recipe/detail/qrcode/download")
 	public String downloadQRCode(@RequestParam int id, HttpServletResponse response) {
 		Recipe recipe = dao.findById(id);
-		String fileName = recipe.getName() + "Recipe ";
-		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 
+		String fileName = recipe.getName() + "Recipe ";
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
-
+		HttpSession session = request.getSession();
 		try {
-			URL url = new URL(baseUrl + "/recipe/detail/qrcode?id=" + id);
+			URL url = new URL("http://chefswebapp-env.eba-56tcnj8j.us-east-2.elasticbeanstalk.com/recipe/detail/qrcode?id=" + id);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(
@@ -198,11 +220,14 @@ public class RecipeController {
 			}
 			out.close();
 			in.close();
+			session.setAttribute("downloadSuccssMessage",
+					"QR code downloaded succssfully, find it in your downloads folder!");
 			return "redirect:/recipe/detail?id=" + recipe.getId();
 		} catch (IOException e) {
 			e.printStackTrace();
+			session.setAttribute("downloadFailMessage", "QR code download failed");
+
 			return "redirect:/recipe/detail?id=" + recipe.getId();
 		}
 	}
-
 }

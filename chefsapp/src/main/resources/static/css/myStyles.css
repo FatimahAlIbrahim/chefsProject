@@ -1,5 +1,26 @@
 @charset "ISO-8859-1";
 
+@import
+	url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css2?family=ABeeZee&family=Lobster&display=swap');
+
+body {
+	font-family: 'ABeeZee', sans-serif;
+}
+
+.filterNav {
+	color: white;
+	background-color: #7d0633;
+	margin-top: -0.60%;
+	padding-top: 2%;
+	font-size: 1.1em;
+	font-weight: 600;
+	height: auto;
+	border-top: thin solid white;
+}
+
 .colorOne {
 	color: #7d0633 !important;
 }
@@ -16,19 +37,32 @@
 	color: #fbdcc4 !important;
 }
 
-.btn-style{
+.btn-style {
 	background-color: white;
 	color: #7d0633;
 	border: solid thin #7d0633;
 }
 
-.btn-style:hover{
+.btn-style2 {
+	background-color: white;
+	color: #7d0633;
+	border: solid thin #7d0633;
+	margin-top: 8%;
+}
+
+.btn-style:hover {
 	background-color: #7d0633;
 	color: white;
 	border: solid thin #7d0633;
 }
 
-form, #userInfo {
+#userInfo {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2%;
+}
+
+form {
 	margin-left: 10%;
 	margin-right: 10%;
 	margin-bottom: 2%;
@@ -42,7 +76,7 @@ form, #userInfo {
 }
 
 .carousel-item, .carousel-image {
-	height: 90vh;
+	height: 100vh;
 	min-height: 300px;
 	background: no-repeat center center scroll;
 	-webkit-background-size: cover;
@@ -54,7 +88,7 @@ form, #userInfo {
 	transform: translateY(-50%);
 	bottom: initial;
 	color: black;
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 255, 255, 0.8);
 	border-radius: 3px;
 	font-weight: 600;
 	color: black;
@@ -62,9 +96,14 @@ form, #userInfo {
 }
 
 .carousel-caption h5 {
-	font-size: 1.5em;
+	font-size: 2em;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
+	font-weight: 900;
+}
+
+.carousel-caption p {
+	font-size: 1.75em;
 }
 
 #recipeImg, #recipeImgEdit {
@@ -91,14 +130,16 @@ form, #userInfo {
 	background-color: white;
 	font-weight: 600;
 	margin: 1%;
+	overflow: hidden;
+	
 }
 
-.ingText, .insText
-{
- word-wrap: break-word;
+.ingText, .insText {
+	word-wrap: break-word;
 }
 
-#ingContainer, #instructionsCon, #ingContainerEdit, #instructionsConEdit {
+#ingContainer, #instructionsCon, #ingContainerEdit, #instructionsConEdit
+	{
 	padding: 1%;
 }
 
@@ -113,6 +154,52 @@ form, #userInfo {
 	width: 100%;
 	height: 15vw;
 	object-fit: cover;
+}
+
+#recipeDetailImg {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.recipeContainer {
+	width: 100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	margin-top: 5%;
+	margin-bottom: 5%;
+	font-family: 'ABeeZee', sans-serif;
+}
+
+#recipeDetailName {
+	background-color: rgb(125, 6, 51, 0.6);
+	font-family: 'Lobster';
+	display: block;
+	color: #fbdcc4;
+	font-size: 55px;
+}
+
+#ingredients {
+	border-right: thin solid #f2a07b;
+	word-wrap: break-word;
+}
+
+.chefsContainer {
+	margin: 3% 5%;
+}
+
+.col span {
+	color: #7d0633;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.info {
+	border-right: thin solid #f2a07b;
+	text-align: center;
+	margin-top: 5px;
+	color: #31112c;
+	font-size: 20px;
+	font-weight: 500;
 }
 
 .fa {
@@ -132,11 +219,6 @@ form, #userInfo {
 	cursor: pointer;
 }
 
-#recipeDetailImg {
-	width: 100%;
-	height: 50vh;
-}
-
 .container {
 	width: 100%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
@@ -148,18 +230,12 @@ form, #userInfo {
 	padding: 30px 0;
 }
 
-#ingredients {
-	border-right: thin solid red;
-}
-
 #instructions, #ingredients {
 	height: 400px;
 }
-
-#shareRecipeButton {
-	margin: 20px 0 100px 0;
+#instructions{
+word-wrap: break-word;
 }
-
 .navbar-nav a {
 	font-size: 1em;
 	font-weight: bold;

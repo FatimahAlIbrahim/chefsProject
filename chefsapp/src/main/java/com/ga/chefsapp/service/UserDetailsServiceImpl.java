@@ -10,22 +10,21 @@ import com.ga.chefsapp.dao.UserDao;
 import com.ga.chefsapp.model.User;
 import com.ga.chefsapp.model.UserDetailsImpl;
 
-
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	UserDao dao;
+
 	@Override
 	public UserDetails loadUserByUsername(String emailAddress) throws UsernameNotFoundException {
 		User user = dao.findByEmailAddress(emailAddress);
-		
-		if(user == null)
+
+		if (user == null)
 			throw new UsernameNotFoundException("Not found");
-		
+
 		UserDetailsImpl userDetailsObj = new UserDetailsImpl(user);
-		
+
 		return userDetailsObj;
 	}
-
 }

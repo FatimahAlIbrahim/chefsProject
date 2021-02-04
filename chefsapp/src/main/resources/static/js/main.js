@@ -2,12 +2,16 @@ $(document).ready(function() {
 
 	// for loading the image in navbar correctly
 	if ($(location).attr("href").endsWith("/")) {
-		$(logo).attr("src", "images/chefs.svg");
+		$("#logo").attr("src", "images/chefs.svg");
+		$("#favIcon").attr("href", "images/chefIcon.png");
+
 	}
 	else {
-		$(logo).attr("src", "../images/chefs.svg");
-	}
+		$("#logo").attr("src", "../images/chefs.svg");
+		$("#favIcon").attr("href", "../images/chefIcon.png");
 
+	}
+	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// FOR ADD RECIPE 
@@ -16,12 +20,16 @@ $(document).ready(function() {
 		var amount = $("#amount").val();
 		var measurement = $("#measurement").children("option:selected").val();
 		var item = $("#item").val();
+<<<<<<< HEAD
 $.trim(item).length
+=======
+
+>>>>>>> 4c7a2ee2a92223c1814a6467af158d59bf9e18d6
 		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
-				var ingredient = amount + " " + measurement + " of " + item;
+				var ingredient = amount + " " + measurement + " of " + item.trim();
 			else
-				var ingredient = amount + " " + item;
+				var ingredient = amount + " " + item.trim();
 			$("#ingContainer").append("<div class='ingItem'><p class='ingText' style='display: inline;'>" + ingredient + "</p><span class='deleteIng' style='display:  none; text-align: right; float: right;'><b>Delete</b></span></div>");
 		}
 		else {
@@ -59,14 +67,14 @@ $.trim(item).length
 		$(this).children(".deleteIns").css("display", "inline");
 		$(this).children(".moveUp").css("display", "inline");
 		$(this).children(".moveDown").css("display", "inline");
-		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh" });
+		$(this).css({ "background-color": "#7d0633", "color": "white" });
 	});
 
 	$("#instructionsCon").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
 		$(this).children(".moveUp").css("display", "none");
 		$(this).children(".moveDown").css("display", "none");
-		$(this).css({ "background-color": "white", "color": "#31112c", "height": "" });
+		$(this).css({ "background-color": "white", "color": "#31112c" });
 	});
 
 	$("#instructionsCon").on("click", ".deleteIns", function() {
@@ -178,15 +186,15 @@ $.trim(item).length
 		for (var i in instructions) {
 			$("#instructionsConEdit").append("<div class='insItem'><p class='insText' style='display: inline;'>" + instructions[i] + "</p><br><span class='deleteIns' style='display:  none; text-align: right; float: right;'><b >- Delete</b></span><span class='moveDown' style='display:  none; text-align: right; float: right;'><b>- Move Down -</b></span><span class='moveUp' style='display:  none; text-align: right; float: right;'><b>Move Up -</b></span></div>");
 		}
-
-		$('#aCuisine option[value=' + $("#cuisineTemp").val() + ']').attr('selected', 'selected');
-
-		$('#aType option[value=' + $("#typeTemp").val() + ']').attr('selected', 'selected');
-
+		
+		$('#aCuisine option[value='+$("#cuisineTemp").val()+']').attr('selected','selected');
+		
+		$('#aType option[value='+$("#typeTemp").val()+']').attr('selected','selected');
+		
 		var duration = $("#durationTemp").val().split(' ');
 		$("#durationNumberEdit").val(duration[0]);
-		$('#durationTypeEdit option[value=' + duration[1] + ']').attr('selected', 'selected');
-
+		$('#durationTypeEdit option[value='+duration[1]+']').attr('selected','selected');
+		
 
 	});
 
@@ -197,9 +205,9 @@ $.trim(item).length
 
 		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
-				var ingredient = amount + " " + measurement + " of " + item;
+				var ingredient = amount + " " + measurement + " of " + item.trim();
 			else
-				var ingredient = amount + " " + item;
+				var ingredient = amount + " " + item.trim();
 			$("#ingContainerEdit").append("<div class='ingItem'><p class='ingText' style='display: inline;'>" + ingredient + "</p><span class='deleteIng' style='display:  none; text-align: right; float: right;'><b>Delete</b></span></div>");
 		}
 		else {
@@ -237,14 +245,15 @@ $.trim(item).length
 		$(this).children(".deleteIns").css("display", "inline");
 		$(this).children(".moveUp").css("display", "inline");
 		$(this).children(".moveDown").css("display", "inline");
-		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh" });
+		$(this).css({ "background-color": "#7d0633", "color": "white"});
+
 	});
 
 	$("#instructionsConEdit").on("mouseleave", ".insItem", function() {
 		$(this).children(".deleteIns").css("display", "none");
 		$(this).children(".moveUp").css("display", "none");
 		$(this).children(".moveDown").css("display", "none");
-		$(this).css({ "background-color": "white", "color": "#31112c", "height": "" });
+		$(this).css({ "background-color": "white", "color": "#31112c"});
 	});
 
 	$("#instructionsConEdit").on("click", ".deleteIns", function() {
@@ -295,6 +304,37 @@ $.trim(item).length
 	}
 
 	$("#editRecipe").submit(inputValidationEdit);
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// FOR RECIPE INDEX
+	$("#recipeFilter").ready(function() {
+		var indexOfType = $(location).attr("href").indexOf("first");
+		var indexOfAnd = $(location).attr("href").indexOf("&");
+		type="";
+		if(indexOfAnd == -1){
+			type = $(location).attr("href").substring(indexOfType+6, $(location).attr("href").length);
+		}else{
+			type = $(location).attr("href").substring(indexOfType+6, indexOfAnd);
+		}
+		if (type == "All") {
+			$("#All").attr("checked", "checked");
+		}
+		else if (type == "Soup") {
+			$("#Soup").attr("checked", "checked");
+		}
+		else if (type == "Appetizer") {
+			$("#Appetizer").attr("checked", "checked");
+		}
+		else if (type == "Salad") {
+			$("#Salad").attr("checked", "checked");
+		}
+		else if (type == "Main+Course") {
+			$("#MainCourse").attr("checked", "checked");
+		}
+		else if (type == "Dessert") {
+			$("#Dessert").attr("checked", "checked");
+		}
+	});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 

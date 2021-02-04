@@ -7,6 +7,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Chefs APP</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -23,6 +25,10 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
+
+<link id="favIcon" rel="icon" type="image/svg"
+	href="../images/chefs.svg">
+
 </head>
 <body>
 
@@ -44,9 +50,9 @@
 				<security:authorize access="isAuthenticated()">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link"
-							href="${appName}chefs/index">Chefs</a></li>
+							href="${appName}chefs/index">All Chefs</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${appName}recipe/index?first=All">Recipes</a></li>
+							href="${appName}recipe/index?first=All">All Recipes</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="${appName}recipe/add">Add Recipe</a></li>
 					</ul>
@@ -63,9 +69,9 @@
 				<security:authorize access="!isAuthenticated()">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link"
-							href="${appName}chefs/index">Chefs</a></li>
+							href="${appName}chefs/index">All Chefs</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${appName}recipe/index?first=All">Recipes</a></li>
+							href="${appName}recipe/index?first=All">All Recipes</a></li>
 					</ul>
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item"><a class="nav-link"
@@ -111,13 +117,22 @@
 		%>
 	</c:if>
 
-	<c:if test="${loginSuccessMessage != null}">
+	<c:if test="${downloadSuccssMessage != null}">
 		<div class="alert alert-success fade show" role="alert">
-			${loginSuccessMessage}</div>
+			${downloadSuccssMessage}</div>
 		<%
-		session.removeAttribute("loginSuccessMessage");
+		session.removeAttribute("downloadSuccssMessage");
 		%>
 	</c:if>
+
+	<c:if test="${downloadFailMessage != null}">
+		<div class="alert alert-danger fade show" role="alert">
+			${downloadFailMessage}</div>
+		<%
+		session.removeAttribute("downloadFailMessage");
+		%>
+	</c:if>
+
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
@@ -129,7 +144,7 @@
 		crossorigin="anonymous"></script>
 	<script src="../js/main.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
-	
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
