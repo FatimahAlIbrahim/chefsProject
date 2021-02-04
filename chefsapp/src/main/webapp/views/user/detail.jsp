@@ -21,12 +21,12 @@
 				</span>
 			</p>
 			<p class="detailP colorTwo">
-				<i class="bi bi-envelope"></i></i><span> <b>Email:</b>
+				<i class="bi bi-envelope"></i><span> <b>Email:</b>
 					${user.getEmailAddress()}
 				</span>
 			</p>
 			<p class="detailP colorTwo">
-				<i class="bi bi-file-text"></i></i><span> <b>Number of added
+				<i class="bi bi-file-text"></i><span> <b>Number of added
 						recipes:</b> ${count}
 				</span>
 			</p>
@@ -88,11 +88,11 @@
 							</p>
 						</div>
 						<div class="card-footer">
-							<c:forEach var="i" begin="1" end="${rates[0][status.index]}"
+							<c:forEach var="i" begin="1" end="${rates.get(status.index)}"
 								step="1">
 								<i class="fa fa-star checked" id=i></i>
 							</c:forEach>
-							<c:forEach var="i" begin="1" end="${5-rates[0][status.index]}"
+							<c:forEach var="i" begin="1" end="${5-rates.get(status.index)}"
 								step="1">
 								<i class="fa fa-star unchecked" id=i></i>
 							</c:forEach>
@@ -171,6 +171,7 @@
 					type="hidden" value="ROLE_USER"> <input name="userId"
 					type="hidden" value="${user.getUserId()}"> <input
 					type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					
 				<button id="editBtn" type="submit" class="btn btn-style mb-3">Edit</button>
 			</form>
 		</div>
