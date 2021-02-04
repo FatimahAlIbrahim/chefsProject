@@ -38,7 +38,7 @@
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
 				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon custom-toggler"></i></span>
+				<span class="navbar-toggler-icon custom-toggler"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<security:authorize access="isAuthenticated()">

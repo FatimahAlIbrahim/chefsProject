@@ -16,8 +16,8 @@ $(document).ready(function() {
 		var amount = $("#amount").val();
 		var measurement = $("#measurement").children("option:selected").val();
 		var item = $("#item").val();
-
-		if (amount != "" && item != "") {
+$.trim(item).length
+		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
 				var ingredient = amount + " " + measurement + " of " + item;
 			else
@@ -168,27 +168,25 @@ $(document).ready(function() {
 		for (var i in ingredients) {
 			$("#ingContainerEdit").append("<div class='ingItem'><p class='ingText' style='display: inline;'>" + ingredients[i] + "</p><span class='deleteIng' style='display:  none; text-align: right; float: right;'><b>Delete</b></span></div>");
 		}
-		
+
 		var warning = $("#allergyWarningTemp").val().split(',');
 		for (var i in warning) {
-			$('#aWarnings option[value='+warning[i]+']').attr('selected','selected');
+			$('#aWarnings option[value=' + warning[i] + ']').attr('selected', 'selected');
 		}
-		
+
 		var instructions = $("#instructionsTemp").val().split('^');
 		for (var i in instructions) {
 			$("#instructionsConEdit").append("<div class='insItem'><p class='insText' style='display: inline;'>" + instructions[i] + "</p><br><span class='deleteIns' style='display:  none; text-align: right; float: right;'><b >- Delete</b></span><span class='moveDown' style='display:  none; text-align: right; float: right;'><b>- Move Down -</b></span><span class='moveUp' style='display:  none; text-align: right; float: right;'><b>Move Up -</b></span></div>");
 		}
-		
-		$('#aCuisine option[value='+$("#cuisineTemp").val()+']').attr('selected','selected');
-		
-		$('#aType option[value='+$("#typeTemp").val()+']').attr('selected','selected');
-		
-		$("#durationNumberEdit").val($("#durationTemp").val().substring(0, 1));
-		$('#durationTypeEdit option[value='+$("#durationTemp").val().substring(2, $("#durationTemp").val().length)+']').attr('selected','selected');
-		
-		
-		
-		
+
+		$('#aCuisine option[value=' + $("#cuisineTemp").val() + ']').attr('selected', 'selected');
+
+		$('#aType option[value=' + $("#typeTemp").val() + ']').attr('selected', 'selected');
+
+		var duration = $("#durationTemp").val().split(' ');
+		$("#durationNumberEdit").val(duration[0]);
+		$('#durationTypeEdit option[value=' + duration[1] + ']').attr('selected', 'selected');
+
 
 	});
 
@@ -197,7 +195,7 @@ $(document).ready(function() {
 		var measurement = $("#measurementEdit").children("option:selected").val();
 		var item = $("#itemEdit").val();
 
-		if (amount != "" && item != "") {
+		if (amount != "" && item.trim() != "") {
 			if (measurement != "--")
 				var ingredient = amount + " " + measurement + " of " + item;
 			else
@@ -239,7 +237,7 @@ $(document).ready(function() {
 		$(this).children(".deleteIns").css("display", "inline");
 		$(this).children(".moveUp").css("display", "inline");
 		$(this).children(".moveDown").css("display", "inline");
-		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh"});
+		$(this).css({ "background-color": "#7d0633", "color": "white", "height": "15vh" });
 	});
 
 	$("#instructionsConEdit").on("mouseleave", ".insItem", function() {
@@ -297,5 +295,41 @@ $(document).ready(function() {
 	}
 
 	$("#editRecipe").submit(inputValidationEdit);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// FOR RECIPE INDEX
+	
+	$("#recipeFilter").ready(function() {
+
+		var indexOfType = $(location).attr("href").indexOf("first");
+		var indexOfAnd = $(location).attr("href").indexOf("&");
+		
+		type="";
+		if(indexOfAnd == -1){
+			type = $(location).attr("href").substring(indexOfType+6, $(location).attr("href").length);
+		}else{
+			type = $(location).attr("href").substring(indexOfType+6, indexOfAnd);
+		}
+		if (type == "All") {
+			$("#All").attr("checked", "checked");
+		}
+		else if (type == "Soup") {
+			$("#Soup").attr("checked", "checked");
+		}
+		else if (type == "Appetizer") {
+			$("#Appetizer").attr("checked", "checked");
+		}
+		else if (type == "Salad") {
+			$("#Salad").attr("checked", "checked");
+		}
+		else if (type == "Main+Course") {
+			$("#MainCourse").attr("checked", "checked");
+		}
+		else if (type == "Dessert") {
+			$("#Dessert").attr("checked", "checked");
+		}
+
+	});
 
 });

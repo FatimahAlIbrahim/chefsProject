@@ -177,7 +177,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/detail/qrcode/download")
-	public String downloadQRCode(@RequestParam String email, HttpServletResponse response) throws MalformedURLException {
+	public String downloadQRCode(@RequestParam String email, HttpServletResponse response){
 		//String appName = env.getProperty("app.name");
 		User user = userDao.findByEmailAddress(email);
 		String fileName = "Chef " + user.getFirstName() + " " + user.getLastName();
@@ -188,7 +188,7 @@ public class UserController {
 		String pathToDownloads = downdloadDirDir.getPath();
 		
 		try {
-			URL url = new URL(baseUrl+"/user/detail/qrcode?email=" + email);
+			URL url = new URL("http://chefswebapp-env.eba-56tcnj8j.us-east-2.elasticbeanstalk.com/user/detail/qrcode?email=" + email);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(new File(pathToDownloads+System.getProperty("file.separator")+fileName+".png"));

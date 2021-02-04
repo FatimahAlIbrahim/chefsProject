@@ -8,38 +8,37 @@
 		<div class="col-sm-2">
 			<p>Select the type of meal</p>
 
-			<form action="${appName}recipe/index" method="get">
+			<form action="${appName}recipe/index" id="recipeFilter" method="get">
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
 						value="All" id="All" required> <label
-						class="form-check-label" for="Arapic"> All</label>
+						class="form-check-label" for="Arapic">All</label>
 				</div>
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
 						value="Soup" id="Soup"> <label class="form-check-label"
-						for="Arapic"> Soup</label>
+						for="Arapic">Soup</label>
 				</div>
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
-						value="Appetizer" id="defaultCheck2"> <label
-						class="form-check-label" for="defaultCheck2"> Appetizer </label>
+						value="Appetizer" id="Appetizer"> <label
+						class="form-check-label" for="defaultCheck2">Appetizer</label>
 				</div>
 
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
-						value="Salad" id="defaultCheck2"> <label
-						class="form-check-label" for="defaultCheck2"> Salad </label>
+						value="Salad" id="Salad"> <label
+						class="form-check-label" for="defaultCheck2">Salad</label>
 				</div>
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
-						value="Main Course" id="defaultCheck2"> <label
-						class="form-check-label" for="defaultCheck2"> Main Course
-					</label>
+						value="Main Course" id="MainCourse"> <label
+						class="form-check-label" for="defaultCheck2">Main Course</label>
 				</div>
 				<div class="form-check">
 					<input name="first" class="form-check-input" type="radio"
-						value="Dessert" id="defaultCheck2"> <label
-						class="form-check-label" for="defaultCheck2"> Dessert </label>
+						value="Dessert" id="Dessert"> <label
+						class="form-check-label" for="defaultCheck2">Dessert</label>
 				</div>
 
 				<input type="hidden" name="${_csrf.parameterName}"
