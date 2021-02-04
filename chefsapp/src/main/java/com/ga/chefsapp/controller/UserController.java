@@ -132,8 +132,7 @@ public class UserController {
 				ratelist.add(0);
 			}
 		}
-		var rateIt = Arrays.asList(ratelist);
-		mv.addObject("rates", rateIt);
+		mv.addObject("rates", ratelist);
 		mv.addObject("recipes", recipes);
 		mv.addObject("count", count);
 		mv.addObject("flag", flag);
