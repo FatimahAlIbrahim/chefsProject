@@ -36,6 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.hasAnyRole("USER", "ADMIN").antMatchers("/user/delete").hasRole("ADMIN")
 
 				.and().formLogin()
+				.loginPage("/user/login")
+			    .loginProcessingUrl("/login")
+			    .defaultSuccessUrl("/",true)
+			    .failureUrl("/user/login?error=true")
 
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
 				.deleteCookies("JSESSIONID").invalidateHttpSession(true);

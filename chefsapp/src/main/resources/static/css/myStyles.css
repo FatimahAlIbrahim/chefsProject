@@ -13,12 +13,10 @@ body {
 .filterNav {
 	color: white;
 	background-color: #7d0633;
-	margin-top: -0.60%;
 	padding-top: 2%;
 	font-size: 1.1em;
 	font-weight: 600;
 	height: auto;
-	border-top: thin solid white;
 }
 
 .colorOne {
@@ -62,6 +60,15 @@ body {
 	margin-bottom: 2%;
 }
 
+#userInfoContainer {
+	display: flex;
+	flex-direction: row;
+}
+
+#userInfoContainer div{
+	width:33%;
+}
+
 form {
 	margin-left: 10%;
 	margin-right: 10%;
@@ -96,14 +103,14 @@ form {
 }
 
 .carousel-caption h5 {
-	font-size: 2em;
+	font-size: 1.50em;
 	text-transform: uppercase;
 	letter-spacing: 0.2em;
 	font-weight: 900;
 }
 
 .carousel-caption p {
-	font-size: 1.75em;
+	font-size: 1.25em;
 }
 
 #recipeImg, #recipeImgEdit {
@@ -150,9 +157,12 @@ form {
 	margin-bottom: 5%;
 }
 
+.card {
+	width: 30%;
+}
+
 .card-img-top {
 	width: 100%;
-	height: 15vw;
 	object-fit: cover;
 }
 
@@ -263,4 +273,15 @@ word-wrap: break-word;
 .navbar-light .navbar-toggler-icon {
 	background-image: url("../images/humburger.svg");
 	border: solid thin white;
+}
+
+@media only screen and (max-width: 600px) {
+	#userInfoContainer {
+	display: flex;
+	flex-direction: column;
+	}
+
+	#userInfoContainer div{
+	width:100%;
+	}
 }

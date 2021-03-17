@@ -9,7 +9,7 @@
 		<li data-bs-target="#carouselExampleDark" data-bs-slide-to="3"></li>
 	</ol>
 	<div class="carousel-inner">
-		<div class="carousel-item active" data-bs-interval="10000">
+		<div class="carousel-item active">
 			<img
 				src="https://post.healthline.com/wp-content/uploads/2020/09/healthy-eating-ingredients-1200x628-facebook-1200x628.jpg"
 				class="d-block w-100 img-fluid carousel-image">
@@ -18,7 +18,7 @@
 				<p>Get all the necessary ingredients for the recipe!</p>
 			</div>
 		</div>
-		<div class="carousel-item" data-bs-interval="2000">
+		<div class="carousel-item">
 			<img
 				src="https://cnet1.cbsistatic.com/img/1Vr68tsvWvkv3bu-JUSOscJfOJU=/940x0/2019/09/12/64dcd678-6938-48b6-958c-5e6b816c3c99/vegan-cooking-show-youtube.jpg"
 				class="d-block w-100 img-fluid carousel-image">
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</div>
-	<a class="carousel-control-prev" href="#carouselExampleDark"
+	<!-- <a class="carousel-control-prev" href="#carouselExampleDark"
 		role="button" data-bs-slide="prev"> <span
 		class="carousel-control-prev-icon" aria-hidden="true"></span> <span
 		class="visually-hidden">Previous</span>
@@ -54,5 +54,5 @@
 		role="button" data-bs-slide="next"> <span
 		class="carousel-control-next-icon" aria-hidden="true"></span> <span
 		class="visually-hidden">Next</span>
-	</a>
+	</a> -->
 </div>

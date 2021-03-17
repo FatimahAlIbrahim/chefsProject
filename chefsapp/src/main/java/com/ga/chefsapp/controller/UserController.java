@@ -95,12 +95,18 @@ public class UserController {
 
 	// HTTP GET Request - Get Login
 	@GetMapping("/user/login")
-	public ModelAndView login() {
+	public ModelAndView login(@RequestParam(required = false) String error) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("user/login");
 
 		HomeController hc = new HomeController();
 		hc.setAppName(mv, env);
+		
+		if(error != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginFailMessage", "Incorrect Email or Password");
+		}
+		
 		return mv;
 	}
 
@@ -119,6 +125,8 @@ public class UserController {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
+		String loogedInEmail = authentication.getName();
+		User loogedInUser = userDao.findByEmailAddress(loogedInEmail);
 
 		boolean flag = false;
 		if (username.equals(user.getEmailAddress())) {
@@ -137,6 +145,7 @@ public class UserController {
 		mv.addObject("count", count);
 		mv.addObject("flag", flag);
 		mv.addObject("user", user);
+		mv.addObject("loogedInUser", loogedInUser);
 
 		return mv;
 	}
@@ -190,13 +199,13 @@ public class UserController {
 	public String downloadQRCode(@RequestParam String email, HttpServletResponse response) {
 		User user = userDao.findByEmailAddress(email);
 		String fileName = "Chef " + user.getFirstName() + " " + user.getLastName();
-
+		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 		HttpSession session = request.getSession();
 
 		try {
-			URL url = new URL("http://chefswebapp-env.eba-56tcnj8j.us-east-2.elasticbeanstalk.com/user/detail/qrcode?email=" + email);
+			URL url = new URL(baseUrl+"/user/detail/qrcode?email=" + email);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(

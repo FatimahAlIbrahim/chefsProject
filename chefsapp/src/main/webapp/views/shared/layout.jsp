@@ -116,6 +116,14 @@
 		session.removeAttribute("signupSuccessMessage");
 		%>
 	</c:if>
+	
+	<c:if test="${loginFailMessage != null}">
+		<div class="alert alert-danger fade show" role="alert">
+			${loginFailMessage}</div>
+		<%
+		session.removeAttribute("loginFailMessage");
+		%>
+	</c:if>
 
 	<c:if test="${downloadSuccssMessage != null}">
 		<div class="alert alert-success fade show" role="alert">

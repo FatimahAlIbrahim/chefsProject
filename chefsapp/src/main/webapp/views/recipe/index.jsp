@@ -5,7 +5,7 @@
 
 <jsp:include page="../shared/layout.jsp" />
 <div class="container-fluid" style="height: 100vh;">
-	
+
 	<div class="row" style="height: inherit;">
 		<div class="col-sm-2 filterNav">
 			<p>Select the type of meal</p>
@@ -50,7 +50,7 @@
 			<div class="row row-cols-1 row-cols-md-3 g-4">
 				<c:forEach items="${recipes}" var="recipe" varStatus="status">
 					<div class="col" style="margin-top: 10px; width: 25%;">
-						<div class="card h-100">
+						<div class="card h-100 w-100">
 							<img src="${recipe.picture }" class="card-img-top" alt="...">
 							<div class="card-body">
 
@@ -88,32 +88,26 @@
 
 							<security:authorize access="isAuthenticated()">
 
-								<div class="card-footer">
+								<c:set var="userId" value="${user.getUserId()}" />
+								<c:set var="recipeUserId"
+									value="${recipe.getUser().getUserId()}" />
+								<c:set var="role" value="${user.getRole()}" />
 
-									<c:set var="userId" value="${user.getUserId()}" />
-									<c:set var="recipeUserId"
-										value="${recipe.getUser().getUserId()}" />
-									<c:set var="role" value="${user.getRole()}" />
+								<c:if
+									test='${(userId eq recipeUserId) || (role eq "ROLE_ADMIN")}'>
+									<div class="card-footer">
+										<c:if test='${userId eq recipeUserId}'>
 
+											<a href="${appName}recipe/edit?id=${recipe.id}">
+												<button class="btn btn-style">Edit</button>
+											</a>
+										</c:if>
+											<a href="${appName}recipe/delete?id=${recipe.id}">
+												<button class="btn btn-style">Delete</button>
+											</a>
+									</div>
+								</c:if>
 
-									<input type="hidden" value="${user.getUserId()}">
-									<c:if test='${userId eq recipeUserId}'>
-
-
-										<a href="${appName}recipe/edit?id=${recipe.id}">
-											<button class="btn btn-style">Edit</button>
-										</a>
-									</c:if>
-
-									<c:if
-										test='${(userId eq recipeUserId) || (role eq "ROLE_ADMIN")}'>
-										<a href="${appName}recipe/delete?id=${recipe.id}">
-											<button class="btn btn-style">Delete</button>
-										</a>
-
-									</c:if>
-
-								</div>
 							</security:authorize>
 						</div>
 					</div>

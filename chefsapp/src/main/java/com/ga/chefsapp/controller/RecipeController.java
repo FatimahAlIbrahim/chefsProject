@@ -201,13 +201,13 @@ public class RecipeController {
 	@GetMapping("/recipe/detail/qrcode/download")
 	public String downloadQRCode(@RequestParam int id, HttpServletResponse response) {
 		Recipe recipe = dao.findById(id);
-
 		String fileName = recipe.getName() + "Recipe ";
+		final String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
 		File downdloadDirDir = new File(System.getProperty("user.home"), "Downloads");
 		String pathToDownloads = downdloadDirDir.getPath();
 		HttpSession session = request.getSession();
 		try {
-			URL url = new URL("http://chefswebapp-env.eba-56tcnj8j.us-east-2.elasticbeanstalk.com/recipe/detail/qrcode?id=" + id);
+			URL url = new URL(baseUrl+"/recipe/detail/qrcode?id=" + id);
 			HttpURLConnection http = (HttpURLConnection) url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(http.getInputStream());
 			FileOutputStream fileOut = new FileOutputStream(

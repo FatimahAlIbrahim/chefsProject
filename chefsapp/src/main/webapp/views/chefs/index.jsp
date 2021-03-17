@@ -8,11 +8,10 @@
 
 <p class="h2 color1"
 	style="margin-top: 2%; margin-bottom: 1%; margin-left: 5%;">Chefs</p>
-
-<div class="row row-cols-1 row-cols-md-3 chefsContainer">
+<div class="row row-cols-1 row-cols-md-3 g-4 chefsContainer">
 	<c:forEach items="${chefs}" var="chef">
-		<div class="col mb-4">
-			<div class="card h-100">
+		<div class="col" style="margin-top: 10px; width: 25%;">
+			<div class="card h-100 w-100">
 				<img src="${chef[2]}" class="card-img-top" alt="...">
 
 				<div class="card-footer colorOne">
