@@ -1,6 +1,9 @@
 # Chefs App
 ## Introduction
 Chefs app is a website that manages the recipes ...
+## Teammates:
+* [Afnan Alfulaij (Team Leader)](https://github.com/AfnanAf)
+* [Fatimah Ali](https://github.com/FatoomFQa)
 ## Technologies used:
 * HTML, CSS, Javascript and JQuery
 * Spring io
